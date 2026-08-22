@@ -1,0 +1,69 @@
+---
+export interface Props {
+  eyebrow: string;
+  title: string;
+  intro?: string;
+  alignment?: "left" | "center";
+  tone?: "default" | "inverse";
+}
+
+const { eyebrow, title, intro, alignment = "left", tone = "default" } = Astro.props;
+---
+
+<header class:list={["section-intro", `section-intro--${alignment}`, `section-intro--${tone}`]}>
+  <p class:list={["eyebrow", tone === "inverse" && "eyebrow--light"]}>{eyebrow}</p>
+  <h2>{title}</h2>
+  {intro && <p class="section-intro__copy">{intro}</p>}
+</header>
+
+<style>
+  .section-intro {
+    max-width: 48rem;
+  }
+
+  .section-intro--center {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .section-intro--center :global(.eyebrow) {
+    justify-content: center;
+  }
+
+  h2 {
+    max-width: 18ch;
+    margin-top: 0.85rem;
+    color: var(--ink, #0b1210);
+    font-family: var(--font-serif, ui-serif, Georgia, serif);
+    font-size: clamp(2rem, 4.8vw, 3.75rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  .section-intro--center h2 {
+    margin-inline: auto;
+  }
+
+  .section-intro__copy {
+    max-width: 64ch;
+    margin-top: 1.15rem;
+    color: var(--muted, #5d6b66);
+    font-size: clamp(1rem, 1.3vw, 1.12rem);
+    line-height: 1.75;
+    text-wrap: pretty;
+  }
+
+  .section-intro--inverse h2 {
+    color: #fff;
+  }
+
+  .section-intro--inverse .section-intro__copy {
+    color: rgb(255 255 255 / 0.7);
+  }
+
+  .section-intro--center .section-intro__copy {
+    margin-inline: auto;
+  }
+</style>

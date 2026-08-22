@@ -1,0 +1,272 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+export type PageHeroTone = "green" | "red" | "dark";
+
+export interface PageHeroMetaItem {
+  label: string;
+  value?: string;
+}
+
+export interface Props {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+  tone?: PageHeroTone;
+  meta?: Array<string | PageHeroMetaItem>;
+}
+
+const {
+  eyebrow,
+  title,
+  intro,
+  image,
+  imageAlt = "",
+  tone = "green",
+  meta = [],
+} = Astro.props;
+---
+
+<section class:list={["page-hero", `page-hero--${tone}`, { "page-hero--with-image": image }]}>
+  <div class="page-hero__inner shell">
+    <div class="page-hero__copy">
+      <p class="page-hero__eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="page-hero__intro">{intro}</p>
+
+      {
+        meta.length > 0 && (
+          <ul class="page-hero__meta" aria-label="Page highlights">
+            {meta.map((item) => {
+              const label = typeof item === "string" ? item : item.label;
+              const value = typeof item === "string" ? undefined : item.value;
+
+              return (
+                <li>
+                  {value && <strong>{value}</strong>}
+                  <span>{label}</span>
+                </li>
+              );
+            })}
+          </ul>
+        )
+      }
+    </div>
+
+    {
+      image && (
+        <figure class="page-hero__media">
+          <Image
+            src={image}
+            alt={imageAlt}
+            widths={[480, 720, 960, 1280]}
+            sizes="(max-width: 760px) calc(100vw - 2.5rem), (max-width: 1100px) 45vw, 560px"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    --hero-accent: var(--green, #00815c);
+    --hero-deep: var(--green-deep, #04352a);
+    --hero-wash: #e8f5ef;
+    --hero-foreground: #fff;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding-block: clamp(7.5rem, 13vw, 11rem) clamp(4.5rem, 8vw, 7.5rem);
+    color: var(--hero-foreground);
+    background:
+      radial-gradient(circle at 8% 12%, color-mix(in srgb, var(--hero-accent) 58%, transparent), transparent 34rem),
+      linear-gradient(125deg, var(--hero-deep), color-mix(in srgb, var(--hero-deep) 72%, #050908));
+  }
+
+  .page-hero::before,
+  .page-hero::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .page-hero::before {
+    width: min(44rem, 70vw);
+    aspect-ratio: 1;
+    inset: -62% auto auto -18%;
+  }
+
+  .page-hero::after {
+    width: min(30rem, 58vw);
+    aspect-ratio: 1;
+    inset: auto -12% -70% auto;
+  }
+
+  .page-hero--red {
+    --hero-accent: var(--red, #d83b36);
+    --hero-deep: var(--red-deep, #8f211f);
+    --hero-wash: #fae9e7;
+  }
+
+  .page-hero--dark {
+    --hero-accent: var(--green, #00a06b);
+    --hero-deep: var(--ink, #0b1210);
+    --hero-wash: #e7ecea;
+  }
+
+  .page-hero--with-image {
+    padding-top: clamp(3.5rem, 6vw, 5.5rem);
+  }
+
+  .page-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 6rem);
+  }
+
+  .page-hero--with-image .page-hero__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.8fr);
+  }
+
+  .page-hero__copy {
+    max-width: 48rem;
+  }
+
+  .page-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 1.15rem;
+    color: color-mix(in srgb, var(--hero-wash) 88%, #fff);
+    font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+    font-size: 0.76rem;
+    font-weight: 750;
+    letter-spacing: 0.18em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .page-hero__eyebrow::before {
+    content: "";
+    width: clamp(1.75rem, 4vw, 3.5rem);
+    height: 2px;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: var(--hero-accent);
+  }
+
+  h1 {
+    max-width: 14ch;
+    color: inherit;
+    font-family: var(--font-serif, ui-serif, Georgia, serif);
+    font-size: clamp(2.75rem, 7vw, 5.75rem);
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .page-hero__intro {
+    max-width: 62ch;
+    margin-top: clamp(1.25rem, 2.5vw, 1.8rem);
+    color: rgb(255 255 255 / 0.78);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.72;
+  }
+
+  .page-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 0;
+    margin: clamp(1.75rem, 3vw, 2.5rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .page-hero__meta li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding-inline: 1rem;
+    border-left: 1px solid rgb(255 255 255 / 0.24);
+  }
+
+  .page-hero__meta li:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .page-hero__meta strong {
+    font-family: var(--font-serif, ui-serif, Georgia, serif);
+    font-size: 1.08rem;
+    line-height: 1.2;
+  }
+
+  .page-hero__meta span {
+    color: rgb(255 255 255 / 0.7);
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+
+  .page-hero__media {
+    position: relative;
+    margin: 0;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.2);
+    border-radius: var(--radius, 1.25rem);
+    background: color-mix(in srgb, var(--hero-deep) 88%, #fff);
+    box-shadow: var(--shadow, 0 1.5rem 4rem rgb(0 0 0 / 0.3));
+    transform: rotate(1.25deg);
+  }
+
+  .page-hero__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 62%, rgb(0 0 0 / 0.2));
+    pointer-events: none;
+  }
+
+  .page-hero__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 760px) {
+    .page-hero {
+      padding-block: 7rem 4rem;
+    }
+
+    .page-hero--with-image {
+      padding-top: 3.5rem;
+    }
+
+    .page-hero--with-image .page-hero__inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .page-hero__media {
+      width: min(100%, 32rem);
+      aspect-ratio: 4 / 3;
+      transform: none;
+    }
+
+    .page-hero__meta li {
+      flex: 1 1 auto;
+    }
+  }
+</style>

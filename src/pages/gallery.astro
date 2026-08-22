@@ -1,0 +1,203 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import mercyHero from "../assets/images/al-rahma-conference/shaykh-hammad-facing-crowd.png";
+import mercy2021 from "../assets/images/mercy-conference/2021/mercy-2021-audience.jpg";
+import mercy2022 from "../assets/images/mercy-conference/2022/mercy-2022-keynote.jpg";
+import mercy2023 from "../assets/images/mercy-conference/2023/mercy-2023-audience.jpg";
+import mercyStage from "../assets/images/mercy-conference/2023/mercy-2023-keynote.jpg";
+import qaGroup from "../assets/images/myl-qa-2026/myl-qa-2026-stage.jpg";
+import qaCommunity from "../assets/images/myl-qa-2026/myl-qa-2026-community.jpg";
+import hidayahAudience from "../assets/images/al-hidayah/al-hidayah-2023-gathering.jpg";
+import hidayahKeynote from "../assets/images/al-hidayah/al-hidayah-2026-keynote.jpg";
+import hoopsTeam from "../assets/images/hoops4humanity/myl-basketball.png";
+import hoopsAction from "../assets/images/hoops4humanity/basketball-1.png";
+
+const photos = [
+  { image: mercy2023, alt: "Audience at Al-Rahma 2023", title: "Al-Rahma", meta: "2023 · Mississauga", shape: "wide" },
+  { image: hoopsAction, alt: "A player shooting at a MYL basketball gathering", title: "Hoops 4 Humanity", meta: "Sport & fellowship", shape: "tall" },
+  { image: qaGroup, alt: "MYL Canada organizers and guests gathered in 2026", title: "Meet, Greet & Q&A", meta: "2026 · Jāmiʿ al-Mustafa", shape: "standard" },
+  { image: hidayahAudience, alt: "A full audience at Al-Hidayah", title: "Al-Hidayah Canada", meta: "Learning together", shape: "wide" },
+  { image: mercy2021, alt: "Audience at the first Al-Rahma conference", title: "The first edition", meta: "2021 · Living Arts Centre", shape: "standard" },
+  { image: mercy2022, alt: "Keynote at Al-Rahma 2022", title: "A growing conference", meta: "2022 · The International Centre", shape: "standard" },
+  { image: hoopsTeam, alt: "Large group photograph from a MYL basketball gathering", title: "The whole team", meta: "Connect · Act · Impact", shape: "panorama" },
+  { image: hidayahKeynote, alt: "Shaykh-ul-Islam teaching at Al-Hidayah Canada 2026", title: "Pure Intentions & Noble Conduct", meta: "Al-Hidayah 2026", shape: "standard" },
+  { image: qaCommunity, alt: "MYL youth at a live question-and-answer session", title: "Questions in community", meta: "MYL Canada 2026", shape: "standard" },
+  { image: mercyStage, alt: "Shaykh Hammad Mustafa on stage at Al-Rahma 2023", title: "A code of humanity", meta: "Third annual conference", shape: "wide" },
+];
+---
+
+<Layout
+  title="Gallery"
+  description="View real MYL Canada, Al-Rahma (Mercy for Humanity), Hoops 4 Humanity and connected Al-Hidayah event photography."
+  image={mercyHero}
+>
+  <main id="main">
+    <PageHero
+      eyebrow="Gallery"
+      title="Community looks better from inside it."
+      intro="Real photographs from MYL Canada programs, the Al-Rahma conference series, Hoops 4 Humanity and connected events supported by MYL volunteers."
+      image={mercyHero}
+      imageAlt="A scholar addressing a full conference audience"
+      tone="dark"
+      meta={[
+        { label: "Conference", value: "Al-Rahma" },
+        { label: "Sport", value: "Hoops 4 Humanity" },
+        { label: "Connection", value: "Al-Hidayah & Q&A" },
+      ]}
+    />
+
+    <section class="section gallery-page">
+      <div class="shell">
+        <SectionIntro
+          eyebrow="In the room"
+          title="Learning, listening, playing and building."
+          intro="Every image below is a supplied MYL asset or official event photograph saved locally for a reliable, placeholder-free site."
+        />
+        <div class="gallery-page__grid">
+          {
+            photos.map((photo) => (
+              <figure class={`gallery-page__item gallery-page__item--${photo.shape}`}>
+                <Image
+                  src={photo.image}
+                  alt={photo.alt}
+                  widths={[480, 800, 1200]}
+                  sizes="(max-width: 700px) 92vw, (max-width: 1050px) 45vw, 31vw"
+                  format="webp"
+                  quality={84}
+                />
+                <figcaption><strong>{photo.title}</strong><span>{photo.meta}</span></figcaption>
+              </figure>
+            ))
+          }
+        </div>
+        <p class="source-note gallery-page__source">
+          Conference and retreat photography is sourced from the official MMCC, Minhaj and Al-Hidayah reports referenced on the relevant event pages.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--compact">
+      <div class="shell cta-band">
+        <p class="eyebrow eyebrow--light">Be in the next frame</p>
+        <h2>Show up. Help out. Bring someone with you.</h2>
+        <p>Follow MYL Canada for current event announcements or join the volunteer team.</p>
+        <div class="button-row">
+          <a class="button button--light" href="/get-involved/">Get involved</a>
+          <a class="button button--ghost" href="https://www.instagram.com/mylcanada/" target="_blank" rel="noreferrer">Follow @mylcanada ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .gallery-page__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-flow: dense;
+    grid-auto-rows: 220px;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .gallery-page__item {
+    position: relative;
+    grid-row: span 2;
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--cream);
+  }
+
+  .gallery-page__item--wide {
+    grid-column: span 2;
+  }
+
+  .gallery-page__item--tall {
+    grid-row: span 3;
+  }
+
+  .gallery-page__item--panorama {
+    grid-column: 1 / -1;
+    grid-row: span 2;
+  }
+
+  .gallery-page__item :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 450ms ease;
+  }
+
+  .gallery-page__item:hover :global(img) {
+    transform: scale(1.025);
+  }
+
+  .gallery-page figcaption {
+    position: absolute;
+    inset: auto 0 0;
+    padding: 3.5rem 1.1rem 1.1rem;
+    background: linear-gradient(transparent, rgb(0 0 0 / 0.84));
+    color: var(--white);
+  }
+
+  .gallery-page figcaption strong,
+  .gallery-page figcaption span {
+    display: block;
+  }
+
+  .gallery-page figcaption strong {
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+  }
+
+  .gallery-page figcaption span {
+    margin-top: 0.15rem;
+    color: rgb(255 255 255 / 0.65);
+    font-size: 0.75rem;
+  }
+
+  .gallery-page__source {
+    margin-top: 1.25rem;
+  }
+
+  .cta-band > p:not(.eyebrow) {
+    max-width: 54ch;
+    margin-top: 1.2rem;
+    color: rgb(255 255 255 / 0.78);
+  }
+
+  .cta-band h2 {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 850px) {
+    .gallery-page__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gallery-page__item--panorama {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .gallery-page__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-auto-rows: auto;
+    }
+
+    .gallery-page__item,
+    .gallery-page__item--wide,
+    .gallery-page__item--tall,
+    .gallery-page__item--panorama {
+      grid-column: auto;
+      grid-row: auto;
+      min-height: 310px;
+    }
+  }
+</style>

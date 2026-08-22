@@ -1,0 +1,287 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
+import ExperienceCard from "../../components/ExperienceCard.astro";
+import qaCommunity from "../../assets/images/myl-qa-2026/myl-qa-2026-community.jpg";
+import qaDiscussion from "../../assets/images/myl-qa-2026/myl-qa-2026-discussion.jpg";
+import mercyImage from "../../assets/images/mercy-conference/2023/mercy-2023-audience.jpg";
+import hidayahImage from "../../assets/images/al-hidayah/al-hidayah-2026-keynote.jpg";
+import hoopsImage from "../../assets/images/hoops4humanity/basketball-1.png";
+
+const eventTypes = [
+  {
+    eyebrow: "MYL flagship",
+    title: "Al-Rahma (Mercy for Humanity)",
+    description:
+      "A conference series centred on the Prophet Muhammad’s ﷺ example of mercy, justice and human dignity.",
+    href: "/events/mercy-for-humanity/",
+    linkLabel: "Explore 2021–2023",
+    image: mercyImage,
+    imageAlt: "The audience at the third Al-Rahma conference",
+  },
+  {
+    eyebrow: "MQI Canada · MYL-supported",
+    title: "Al-Hidayah Canada",
+    description:
+      "A residential learning and spiritual retreat, with MYL Canada volunteers supporting registration and delivery.",
+    href: "/events/al-hidayah/",
+    linkLabel: "Discover Al-Hidayah",
+    image: hidayahImage,
+    imageAlt: "A keynote session at Al-Hidayah Canada 2026",
+  },
+  {
+    eyebrow: "Sport & fellowship",
+    title: "Hoops 4 Humanity",
+    description:
+      "Basketball gatherings that build friendship, teamwork and community-minded action.",
+    href: "/programs/hoops-for-humanity/",
+    linkLabel: "Visit the program",
+    image: hoopsImage,
+    imageAlt: "Basketball action at a MYL community event",
+  },
+  {
+    eyebrow: "Learning & conversation",
+    title: "Halaqahs and scholar Q&As",
+    description:
+      "Relatable spaces for tafsir, identity, contemporary questions and spiritual growth.",
+    href: "/programs/",
+    linkLabel: "Explore programs",
+    image: qaDiscussion,
+    imageAlt: "A MYL Canada scholar question-and-answer session",
+  },
+];
+---
+
+<Layout
+  title="Events & Programs"
+  description="Explore MYL Canada events and programs across conferences, learning circles, spiritual gatherings, youth conversations and community sports."
+  image={qaCommunity}
+>
+  <main id="main">
+    <PageHero
+      eyebrow="Events & Programs"
+      title="Gatherings with something to carry home."
+      intro="MYL events and programs are built around more than attendance: a useful idea, a sincere friendship, a renewed intention or a responsibility worth taking on."
+      image={qaCommunity}
+      imageAlt="MYL Canada youth and scholars gathered in 2026"
+      tone="red"
+      meta={[
+        { label: "Formats", value: "Talks · retreats · sport" },
+        { label: "Updates", value: "@mylcanada" },
+      ]}
+    />
+
+    <section class="section event-types">
+      <div class="shell">
+        <SectionIntro
+          eyebrow="Explore events & programs"
+          title="There is more than one way in."
+          intro="Our public archive confirms conferences, halaqahs, Mawlid gatherings, Q&As, youth i‘tikaf and recreation. Current registrations are announced through MYL Canada’s official channels."
+        />
+        <div class="event-types__grid">
+          {eventTypes.map((event) => <ExperienceCard {...event} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--cream archive">
+      <div class="shell archive__grid">
+        <div class="archive__heading">
+          <p class="eyebrow">Recent & landmark moments</p>
+          <h2>A public record of gathering.</h2>
+          <p class="lead">
+            These are confirmed highlights—not a live schedule. Follow MYL Canada for the next open registration.
+          </p>
+          <a class="button" href="https://www.instagram.com/mylcanada/" target="_blank" rel="noreferrer"
+            >Latest on Instagram ↗</a
+          >
+        </div>
+        <ol class="archive__timeline">
+          <li>
+            <time datetime="2026-08-01">August 1–3, 2026</time>
+            <h3>Al-Hidayah Canada · Pure Intentions & Noble Conduct</h3>
+            <p>
+              A three-day residential retreat at McMaster University organized by MQI Canada, with MYL volunteers supporting registration and event delivery.
+            </p>
+            <a href="/events/al-hidayah/">Retreat details →</a>
+          </li>
+          <li>
+            <time datetime="2026-04">April 2026</time>
+            <h3>Meet, Greet & Q&A with Shaykh Hammad Mustafa</h3>
+            <p>
+              MYL Canada brought youth together at Jāmiʿ al-Mustafa for an interactive discussion of spiritual, intellectual and practical challenges facing Muslims today.
+            </p>
+            <a href="https://www.minhaj.org/english/Canada/tid/62850/Canada-MYL-Canada-Hosts-Meet-Greet-and-QA-Session-with-Shaykh-Hammad-Mustafa-al-Madani-al-Qadri.html" target="_blank" rel="noreferrer">Official recap ↗</a>
+          </li>
+          <li>
+            <time datetime="2025-09-04">September 4, 2025</time>
+            <h3>1500th Mawlid un Nabi ﷺ · Cambridge</h3>
+            <p>
+              A free MYL Canada gathering with Qur’an recitation, nasheeds, poetry and a keynote by Shaykh Dr Abdullah al-Qadri.
+            </p>
+            <a href="https://www.facebook.com/MYLCanada/posts/776213561571108/" target="_blank" rel="noreferrer">Official event post ↗</a>
+          </li>
+          <li>
+            <time datetime="2023-11-18">November 18, 2023</time>
+            <h3>Third Annual Al-Rahma Conference</h3>
+            <p>
+              The International Centre in Mississauga hosted a keynote on the Prophet’s ﷺ final sermon and its call to mercy, equality, justice and dignity.
+            </p>
+            <a href="/events/mercy-for-humanity/">Conference history →</a>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section event-note">
+      <div class="shell event-note__card">
+        <div>
+          <p class="eyebrow eyebrow--light">Planning to attend?</p>
+          <h2>Check the official post before you travel.</h2>
+        </div>
+        <div>
+          <p>
+            Dates, eligibility, capacity and venue details can change. MYL Canada posts the definitive information for each active registration on its social and Eventbrite pages.
+          </p>
+          <div class="button-row">
+            <a class="button button--light" href="https://www.eventbrite.ca/o/myl-muslim-youth-league-canada-54899574643" target="_blank" rel="noreferrer">MYL Eventbrite ↗</a>
+            <a class="button button--ghost" href="/contact/">Contact MYL</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .event-types__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .archive__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .archive__heading {
+    position: sticky;
+    top: 9rem;
+  }
+
+  .archive__heading h2 {
+    max-width: 10ch;
+    margin-top: 1rem;
+  }
+
+  .archive__heading .lead {
+    max-width: 46ch;
+    margin: 1.4rem 0 2rem;
+  }
+
+  .archive__timeline {
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--cream-deep);
+  }
+
+  .archive__timeline li {
+    position: relative;
+    padding: 2rem 0 2rem 3rem;
+    border-bottom: 1px solid var(--cream-deep);
+  }
+
+  .archive__timeline li::before {
+    content: "";
+    position: absolute;
+    width: 0.8rem;
+    aspect-ratio: 1;
+    top: 2.35rem;
+    left: 0;
+    border: 0.22rem solid var(--cream);
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 0 1px var(--red);
+  }
+
+  .archive__timeline li::after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    top: 3.15rem;
+    bottom: -0.8rem;
+    left: 0.38rem;
+    background: var(--red);
+    opacity: 0.25;
+  }
+
+  .archive__timeline li:last-child::after {
+    display: none;
+  }
+
+  .archive time {
+    color: var(--red-deep);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .archive h3 {
+    margin-top: 0.5rem;
+  }
+
+  .archive__timeline p {
+    margin-top: 0.7rem;
+    color: var(--muted);
+  }
+
+  .archive__timeline a {
+    display: inline-block;
+    margin-top: 0.9rem;
+    color: var(--red-deep);
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+
+  .event-note__card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 7vw, 7rem);
+    padding: clamp(2rem, 6vw, 5rem);
+    border-radius: var(--radius-lg);
+    background: var(--green-deep);
+    color: var(--white);
+  }
+
+  .event-note h2 {
+    margin-top: 1rem;
+  }
+
+  .event-note__card > div:last-child > p {
+    color: rgb(255 255 255 / 0.74);
+    font-size: 1.08rem;
+  }
+
+  @media (max-width: 820px) {
+    .archive__grid,
+    .event-note__card {
+      grid-template-columns: 1fr;
+    }
+
+    .archive__heading {
+      position: static;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .event-types__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

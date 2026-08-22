@@ -1,0 +1,323 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import { organization } from "../data/site.js";
+import qaGroup from "../assets/images/myl-qa-2026/myl-qa-2026-stage.jpg";
+import hoodieImage from "../assets/images/herosection/myl-back-hoodies.png";
+import hoopsTeam from "../assets/images/hoops4humanity/myl-basketball.png";
+
+const volunteerEmail = `mailto:${organization.email}?subject=MYL%20Canada%20Volunteer%20Interest`;
+---
+
+<Layout
+  title="Get Involved"
+  description="Volunteer with MYL Canada and contribute to events, learning programs, sports, media, outreach and community service."
+  image={qaGroup}
+>
+  <main id="main">
+    <PageHero
+      eyebrow="Get involved"
+      title="Do meaningful work with good people."
+      intro="MYL Canada is built by people willing to carry a real piece of the work. Bring your reliability, your curiosity and the skills you are still developing."
+      image={qaGroup}
+      imageAlt="MYL Canada youth, organizers and scholars gathered together"
+      meta={[
+        { label: "Bring", value: "Consistency" },
+        { label: "Build", value: "Useful skills" },
+        { label: "Become", value: "Part of the team" },
+      ]}
+    />
+
+    <section class="section invitation">
+      <div class="shell invitation__grid">
+        <div>
+          <p class="eyebrow">Volunteer with MYL</p>
+          <h2>Leadership begins with carrying something well.</h2>
+        </div>
+        <div class="prose">
+          <p class="lead">
+            You do not need a perfect résumé or years of experience. You do need to communicate,
+            follow through and care about the people the work is for.
+          </p>
+          <p>
+            MYL programming creates practical opportunities to learn by doing: preparing a room,
+            welcoming guests, coordinating registration, creating media, running a sports session
+            or helping a thoughtful conversation reach the right people.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--cream roles">
+      <div class="shell">
+        <SectionIntro
+          eyebrow="Ways to contribute"
+          title="Find the work that fits your strengths."
+          intro="Needs change from event to event, but these are the teams most often required to turn a good idea into a strong experience."
+        />
+        <div class="roles__grid">
+          <article><span>01</span><h3>Event operations</h3><p>Set-up, registration, guest care, room flow, vendors and the details that keep a gathering moving.</p></article>
+          <article><span>02</span><h3>Media & design</h3><p>Photography, video, graphics, writing and social content that communicates the work clearly.</p></article>
+          <article><span>03</span><h3>Learning programs</h3><p>Speaker coordination, session support, research, notes and welcoming spaces for good questions.</p></article>
+          <article><span>04</span><h3>Sports & recreation</h3><p>Game logistics, team communication, check-in, officiating support and a positive court culture.</p></article>
+          <article><span>05</span><h3>Community outreach</h3><p>Partnerships, local promotion, service drives and making sure new people feel invited.</p></article>
+          <article><span>06</span><h3>General team</h3><p>Come ready to help where the need is greatest and learn the organization from the ground up.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section expectations">
+      <div class="shell expectations__grid">
+        <figure>
+          <Image
+            src={hoodieImage}
+            alt="Two volunteers wearing Muslim Youth League Canada hoodies"
+            widths={[500, 800, 1051]}
+            sizes="(max-width: 840px) 78vw, 38vw"
+            format="webp"
+            quality={88}
+          />
+        </figure>
+        <div>
+          <p class="eyebrow">What good volunteering looks like</p>
+          <h2>Warmth in spirit. Excellence in delivery.</h2>
+          <ol>
+            <li><span>01</span><div><h3>Be reliable</h3><p>Say what you can do, then do it—or communicate early when something changes.</p></div></li>
+            <li><span>02</span><div><h3>Stay teachable</h3><p>Ask questions, receive feedback and leave each project more capable than you entered.</p></div></li>
+            <li><span>03</span><div><h3>Protect the atmosphere</h3><p>Treat guests, teammates and community members with patience, discretion and respect.</p></div></li>
+            <li><span>04</span><div><h3>Finish well</h3><p>The last details, follow-up and clean-up are part of the service too.</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="team-photo">
+      <Image src={hoopsTeam} alt="MYL Canada basketball players, organizers and community members" widths={[900, 1600, 2400]} sizes="100vw" format="webp" quality={82} />
+      <div class="team-photo__overlay">
+        <div class="shell">
+          <p class="eyebrow eyebrow--light">Come build with us</p>
+          <h2>The team gets stronger when you show up.</h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="section start">
+      <div class="shell start__card">
+        <div>
+          <p class="eyebrow eyebrow--light">Start the conversation</p>
+          <h2>Tell us how you would like to help.</h2>
+          <p>
+            Email the team with your name, city, availability and the kind of work that interests you. MYL Canada will reply with current opportunities when available.
+          </p>
+        </div>
+        <div class="start__actions">
+          <a class="button button--light" href={volunteerEmail}>Email the volunteer team</a>
+          <a class="button button--ghost" href="https://www.instagram.com/mylcanada/" target="_blank" rel="noreferrer">Message @mylcanada ↗</a>
+          <small>No personal information is collected by this website. These links open your email app or the official Instagram profile.</small>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .invitation__grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .invitation h2 {
+    max-width: 12ch;
+    margin-top: 1rem;
+  }
+
+  .roles__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .roles article {
+    min-height: 320px;
+    padding: 1.5rem;
+    border: 1px solid var(--cream-deep);
+    border-radius: var(--radius);
+    background: var(--white);
+  }
+
+  .roles article > span {
+    color: var(--red);
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  .roles h3 {
+    margin-top: 4.5rem;
+  }
+
+  .roles article p {
+    margin-top: 0.8rem;
+    color: var(--muted);
+  }
+
+  .expectations__grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    align-items: center;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .expectations figure {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    min-height: 680px;
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--green-deep);
+  }
+
+  .expectations figure::before {
+    content: "";
+    position: absolute;
+    width: 430px;
+    aspect-ratio: 1;
+    bottom: 5rem;
+    border: 3.2rem solid var(--red);
+    border-radius: 50%;
+  }
+
+  .expectations figure :global(img) {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 680px;
+    object-fit: contain;
+    object-position: bottom;
+  }
+
+  .expectations h2 {
+    margin-top: 1rem;
+  }
+
+  .expectations ol {
+    padding: 0;
+    margin-top: 2rem;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .expectations li {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .expectations li > span {
+    color: var(--red);
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  .expectations li p {
+    margin-top: 0.35rem;
+    color: var(--muted);
+  }
+
+  .team-photo {
+    position: relative;
+    min-height: min(72vw, 760px);
+    overflow: hidden;
+    background: var(--green-deep);
+  }
+
+  .team-photo :global(img) {
+    width: 100%;
+    height: 100%;
+    min-height: min(72vw, 760px);
+    object-fit: cover;
+  }
+
+  .team-photo__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: clamp(2rem, 7vw, 5rem);
+    background: linear-gradient(0deg, rgb(12 44 30 / 0.9), transparent 55%);
+    color: var(--white);
+  }
+
+  .team-photo h2 {
+    max-width: 13ch;
+    margin-top: 1rem;
+  }
+
+  .start__card {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: clamp(2rem, 7vw, 7rem);
+    padding: clamp(2rem, 6vw, 5rem);
+    border-radius: var(--radius-lg);
+    background: var(--red);
+    color: var(--white);
+  }
+
+  .start h2 {
+    margin-top: 1rem;
+  }
+
+  .start__card > div:first-child > p:not(.eyebrow) {
+    margin-top: 1.2rem;
+    color: rgb(255 255 255 / 0.78);
+  }
+
+  .start__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .start__actions small {
+    max-width: 48ch;
+    color: rgb(255 255 255 / 0.62);
+  }
+
+  @media (max-width: 850px) {
+    .invitation__grid,
+    .expectations__grid,
+    .start__card {
+      grid-template-columns: 1fr;
+    }
+
+    .roles__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .roles__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .roles article {
+      min-height: 250px;
+    }
+
+    .expectations figure,
+    .expectations figure :global(img) {
+      min-height: 520px;
+    }
+  }
+</style>

@@ -1,0 +1,334 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import qaGroup from "../assets/images/myl-qa-2026/myl-qa-2026-stage.jpg";
+import qaDiscussion from "../assets/images/myl-qa-2026/myl-qa-2026-discussion.jpg";
+import hoodieImage from "../assets/images/herosection/myl-back-hoodies.png";
+---
+
+<Layout
+  title="About"
+  description="Learn about Muslim Youth League Canada, its mission, values and youth-centred approach to faith, leadership, service and community."
+  image={qaGroup}
+>
+  <main id="main">
+    <PageHero
+      eyebrow="About MYL Canada"
+      title="Rooted in faith. Formed through service."
+      intro="Muslim Youth League Canada is a youth network creating meaningful spaces for young Muslims to deepen their faith, strengthen their identity and contribute to Canadian society with confidence and compassion."
+      image={qaGroup}
+      imageAlt="MYL Canada organizers and guests gathered after a 2026 youth question-and-answer session"
+      meta={[
+        { label: "Established", value: "2016" },
+        { label: "Based in", value: "Mississauga, Ontario" },
+        { label: "Affiliation", value: "Minhaj-ul-Quran International" },
+      ]}
+    />
+
+    <section class="section story">
+      <div class="shell story__grid">
+        <div>
+          <p class="eyebrow">Our purpose</p>
+          <h2>Youth are not a side audience. They are the work.</h2>
+        </div>
+        <div class="prose story__copy">
+          <p class="lead">
+            MYL Canada exists to educate and empower young Muslims navigating life in a Western
+            society—helping them hold Muslim and Canadian identity together with integrity.
+          </p>
+          <p>
+            That purpose comes alive through scholarship, spiritual gatherings, honest
+            conversations, sport, service and large community events. Young people are welcomed as
+            participants, but also invited to organize, communicate, host and lead.
+          </p>
+          <p>
+            MYL Canada is part of Minhaj-ul-Quran International’s wider youth network and works
+            alongside MQI Canada and community institutions on initiatives that support learning,
+            peace, moderation and social contribution.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--cream values">
+      <div class="shell">
+        <SectionIntro
+          eyebrow="What guides us"
+          title="Four commitments, lived together."
+          intro="A strong youth community needs intellectual depth, spiritual life, genuine friendship and useful action."
+        />
+        <div class="values__grid">
+          <article>
+            <span>01</span>
+            <h3>Grounded learning</h3>
+            <p>Classical Islamic knowledge engaged with the questions young people actually face.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Noble character</h3>
+            <p>Faith measured not only by what we know, but by how we carry ourselves and treat others.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Belonging</h3>
+            <p>Spaces where young Muslims can be honest, supported and connected across backgrounds.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Service</h3>
+            <p>Compassion translated into practical work for neighbours, communities and humanitarian causes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section approach">
+      <div class="shell split">
+        <figure class="approach__media">
+          <Image
+            src={qaDiscussion}
+            alt="Young people participating in a MYL Canada question-and-answer gathering"
+            widths={[650, 1000]}
+            sizes="(max-width: 900px) 92vw, 48vw"
+            format="webp"
+            quality={86}
+          />
+        </figure>
+        <div>
+          <p class="eyebrow">How we work</p>
+          <h2>Ask better questions. Build better spaces.</h2>
+          <p class="lead approach__lead">
+            Recent MYL conversations have explored identity, secularism, doubt, digital distraction,
+            artificial intelligence, character and community responsibility.
+          </p>
+          <ul class="approach__list">
+            <li><strong>Listen</strong><span>Begin with the realities young people are carrying.</span></li>
+            <li><strong>Learn</strong><span>Bring scholarship into open, relatable conversation.</span></li>
+            <li><strong>Practice</strong><span>Create opportunities to serve, organize and take responsibility.</span></li>
+            <li><strong>Belong</strong><span>Make friendship and spiritual companionship part of the journey.</span></li>
+          </ul>
+          <a class="text-link" href="/programs/">Explore the work</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="identity-band">
+      <div class="shell identity-band__grid">
+        <div>
+          <p class="eyebrow eyebrow--light">Love · Peace · Knowledge</p>
+          <h2>Confident in faith.<br />Constructive in society.</h2>
+          <p>
+            MYL Canada’s public mission joins spiritual and moral development with leadership,
+            service, Canadian belonging and respect across communities.
+          </p>
+          <a class="button button--light" href="/get-involved/">Find your place</a>
+        </div>
+        <div class="identity-band__visual" aria-hidden="true">
+          <Image src={hoodieImage} alt="" widths={[420, 700, 1051]} sizes="38vw" format="webp" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--compact">
+      <div class="shell source-note">
+        Organization details on this page are informed by MYL Canada’s public profiles and official
+        Minhaj reports. <a href="https://ca.linkedin.com/company/muslim-youth-league-canada" target="_blank" rel="noreferrer"
+          >View the MYL Canada profile ↗</a
+        >
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .story__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 8vw, 8rem);
+  }
+
+  .story h2 {
+    max-width: 12ch;
+    margin-top: 1rem;
+  }
+
+  .story__copy {
+    align-self: end;
+  }
+
+  .values__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .values article {
+    min-height: 310px;
+    padding: 1.5rem;
+    border: 1px solid var(--cream-deep);
+    border-radius: var(--radius);
+    background: var(--paper);
+  }
+
+  .values article:nth-child(even) {
+    transform: translateY(1.5rem);
+  }
+
+  .values article > span {
+    color: var(--red);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  .values h3 {
+    margin-top: 4.5rem;
+  }
+
+  .values article p {
+    margin-top: 0.85rem;
+    color: var(--muted);
+  }
+
+  .approach__media {
+    margin: 0;
+    overflow: hidden;
+    min-height: 600px;
+    border-radius: var(--radius-lg);
+    background: var(--green-deep);
+  }
+
+  .approach__media :global(img) {
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+    object-fit: cover;
+  }
+
+  .approach h2 {
+    margin-top: 1rem;
+  }
+
+  .approach__lead {
+    margin-top: 1.4rem;
+  }
+
+  .approach__list {
+    padding: 0;
+    margin: 2rem 0;
+    list-style: none;
+    border-block: 1px solid var(--line);
+  }
+
+  .approach__list li {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 1rem;
+    padding-block: 0.9rem;
+  }
+
+  .approach__list li + li {
+    border-top: 1px solid var(--line);
+  }
+
+  .approach__list strong {
+    color: var(--green);
+  }
+
+  .approach__list span {
+    color: var(--muted);
+  }
+
+  .identity-band {
+    overflow: hidden;
+    background: var(--green-deep);
+    color: var(--white);
+  }
+
+  .identity-band__grid {
+    display: grid;
+    grid-template-columns: 1fr minmax(320px, 0.7fr);
+    align-items: end;
+    gap: 2rem;
+    min-height: 650px;
+  }
+
+  .identity-band__grid > div:first-child {
+    align-self: center;
+    padding-block: 5rem;
+  }
+
+  .identity-band h2 {
+    margin-top: 1rem;
+  }
+
+  .identity-band p:not(.eyebrow) {
+    max-width: 58ch;
+    margin: 1.4rem 0 2rem;
+    color: rgb(255 255 255 / 0.74);
+  }
+
+  .identity-band__visual {
+    align-self: stretch;
+    position: relative;
+  }
+
+  .identity-band__visual::before {
+    content: "";
+    position: absolute;
+    width: 420px;
+    aspect-ratio: 1;
+    left: 50%;
+    bottom: 4rem;
+    border: 3rem solid var(--red);
+    border-radius: 50%;
+    transform: translateX(-50%);
+  }
+
+  .identity-band__visual :global(img) {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    inset: auto 0 0;
+    object-fit: contain;
+    object-position: bottom;
+  }
+
+  @media (max-width: 900px) {
+    .story__grid,
+    .identity-band__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .values__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .values article:nth-child(even) {
+      transform: none;
+    }
+
+    .identity-band__visual {
+      min-height: 520px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .values__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .values article {
+      min-height: 240px;
+    }
+
+    .approach__media,
+    .approach__media :global(img) {
+      min-height: 390px;
+    }
+  }
+</style>

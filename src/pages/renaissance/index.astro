@@ -1,0 +1,638 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import SectionIntro from "../../components/SectionIntro.astro";
+import { sourceLinks } from "../../data/site.js";
+import summer2025 from "../../assets/images/renaissance/summer-2025.png";
+import spring2024 from "../../assets/images/renaissance/spring-2024.png";
+import summer2023 from "../../assets/images/renaissance/summer-2023.jpeg";
+import founderPortrait from "../../assets/images/renaissance/shaykh-hammad-mustafa.jpg";
+import renaissanceLogo from "../../assets/images/renaissance/renaissance-logo.png";
+
+const currentArticles = [
+  ["Al-Andalus: The Golden Age of the West", "Shaykh Hammad Mustafa al-Madani al-Qadri"],
+  ["Al-Shaykh al-Akbar Ibn ʿArabi: The Mystic Scholar", "Dr Samra Mursaleen"],
+  ["Al-Zahrawi: The Father of Surgery", "Dr Abdullah Raja"],
+  ["Córdoba: The Jewel of Al-Andalus", "Aisha Ahmed Khan"],
+  ["The Rise and Fall of al-Andalus", "Ahmad Mustafa al-Arabi al-Qadri"],
+];
+---
+
+<Layout
+  title="Renaissance · Al-Nahda"
+  description="Explore Renaissance, a seasonal journal of Muslim thought founded by Shaykh Hammad Mustafa al-Madani al-Qadri and featured as a related MYL Canada resource."
+  image={summer2025}
+>
+  <main id="main">
+    <section class="journal-hero">
+      <div class="shell journal-hero__grid">
+        <div class="journal-hero__copy">
+          <p class="eyebrow eyebrow--light">Related intellectual resource</p>
+          <p class="journal-hero__arabic">النهضة</p>
+          <h1 class="display-serif">Renaissance</h1>
+          <p class="journal-hero__tagline">Rekindling an era of Muslim thought.</p>
+          <p class="journal-hero__intro">
+            A seasonal journal bringing scholars and thought leaders together to bridge classical
+            Islamic values with contemporary questions—academic, balanced and accessible.
+          </p>
+          <div class="relationship">
+            Renaissance is founded and led by recurring MYL keynote speaker Shaykh Hammad Mustafa
+            al-Madani al-Qadri. It is featured here as a related resource, not as an MYL-owned publication.
+          </div>
+          <div class="button-row">
+            <a class="button button--light" href={sourceLinks.renaissance} target="_blank" rel="noreferrer">Read at Al-Nahda ↗</a>
+            <a class="button button--ghost" href="/programs/">Back to MYL programs</a>
+          </div>
+        </div>
+        <figure class="journal-hero__cover">
+          <span class="journal-hero__orbit"></span>
+          <Image
+            src={summer2025}
+            alt="Cover of Renaissance Summer 2025: Al-Andalus"
+            widths={[420, 700, 1000]}
+            sizes="(max-width: 820px) 66vw, 32vw"
+            format="webp"
+            quality={90}
+            loading="eager"
+          />
+          <figcaption>Current issue · Summer 2025 · 5 articles</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section--compact founder">
+      <div class="shell founder__panel">
+        <div class="founder__copy">
+          <p class="eyebrow eyebrow--light">Leadership &amp; vision</p>
+          <h2 class="display-serif">Ideas rooted in tradition. Written for today.</h2>
+          <p class="founder__lead">
+            Founded and led by Shaykh Hammad Mustafa al-Madani al-Qadri, Renaissance connects
+            Islamic intellectual history with the questions shaping Muslim life today.
+          </p>
+
+          <div class="button-row">
+            <a
+              class="button"
+              href="https://al-nahda.co.uk/authors/hammad-mustafa-al-madani-al-qadri/"
+              target="_blank"
+              rel="noreferrer">Explore his writing ↗</a
+            >
+            <a class="text-link founder__journal-link" href="https://al-nahda.co.uk/" target="_blank" rel="noreferrer"
+              >Visit Renaissance</a
+            >
+          </div>
+        </div>
+
+        <figure class="founder__profile">
+          <div class="founder__portrait-frame">
+            <Image
+              src={founderPortrait}
+              alt="Shaykh Hammad Mustafa al-Madani al-Qadri"
+              widths={[480, 720, 960]}
+              sizes="(max-width: 840px) min(100vw - 2.5rem, 30rem), 31vw"
+              format="webp"
+              quality={90}
+            />
+            <span class="founder__portrait-mark">
+              <Image
+                src={renaissanceLogo}
+                alt="Renaissance · Al-Nahda"
+                widths={[160, 240]}
+                sizes="112px"
+                format="webp"
+                quality={92}
+              />
+            </span>
+          </div>
+          <figcaption>
+            <span>Founded &amp; led by</span>
+            <strong>Shaykh Hammad Mustafa<br />al-Madani al-Qadri</strong>
+            <small>Founder &amp; Editor-in-Chief</small>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section--cream current-issue">
+      <div class="shell current-issue__grid">
+        <div class="current-issue__cover">
+          <Image src={summer2025} alt="Summer 2025 Al-Andalus issue cover" widths={[400, 700]} sizes="(max-width: 780px) 68vw, 32vw" format="webp" />
+        </div>
+        <div>
+          <p class="eyebrow">Current issue · Summer 2025</p>
+          <h2 class="display-serif">Al-Andalus</h2>
+          <p class="lead current-issue__lead">
+            Five essays explore the history, thinkers, science and cultural life of Muslim Spain.
+          </p>
+          <ol>
+            {
+              currentArticles.map(([title, author], index) => (
+                <li>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div><strong>{title}</strong><small>{author}</small></div>
+                </li>
+              ))
+            }
+          </ol>
+          <a class="button button--green" href={sourceLinks.renaissance} target="_blank" rel="noreferrer">Read the issue at Al-Nahda ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section archive">
+      <div class="shell">
+        <SectionIntro
+          eyebrow="Issue archive"
+          title="A growing shelf of Muslim thought."
+          intro="Selected issue covers provided for the MYL Canada site. The complete archive and article text live at Al-Nahda."
+        />
+        <div class="archive__grid">
+          <a href={sourceLinks.renaissance} target="_blank" rel="noreferrer">
+            <Image src={summer2025} alt="Renaissance Summer 2025 Al-Andalus cover" widths={[320, 520]} sizes="(max-width: 680px) 72vw, 27vw" format="webp" />
+            <span>Summer 2025</span><strong>Al-Andalus</strong>
+          </a>
+          <a href={sourceLinks.renaissance} target="_blank" rel="noreferrer">
+            <Image src={spring2024} alt="Renaissance Spring 2024 issue cover" widths={[320, 520]} sizes="(max-width: 680px) 72vw, 27vw" format="webp" />
+            <span>Spring 2024</span><strong>Renaissance</strong>
+          </a>
+          <a href={sourceLinks.renaissance} target="_blank" rel="noreferrer">
+            <Image src={summer2023} alt="Renaissance Summer 2023 issue cover" widths={[320, 520]} sizes="(max-width: 680px) 72vw, 27vw" format="webp" />
+            <span>Summer 2023</span><strong>Renaissance</strong>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="disciplines">
+      <div class="shell disciplines__grid">
+        <div>
+          <p class="eyebrow eyebrow--light">Fields of inquiry</p>
+          <h2 class="display-serif">A conversation as wide as life.</h2>
+        </div>
+        <ul>
+          <li>Philosophy</li><li>Spirituality</li><li>History</li><li>Health</li>
+          <li>Science</li><li>Psychology</li><li>Society</li><li>Education</li>
+          <li>Art</li><li>Culture</li><li>Law</li><li>Ethics</li><li>Technology</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--compact source-section">
+      <div class="shell source-section__inner">
+        <div>
+          <p class="eyebrow">Editorial home</p>
+          <h2>Read, browse and submit at Al-Nahda.</h2>
+        </div>
+        <div>
+          <p>
+            Article text, contributor profiles, editorial principles, subscriptions and submission guidance are maintained by the Renaissance editorial team.
+          </p>
+          <a class="button" href={sourceLinks.renaissance} target="_blank" rel="noreferrer">Open al-nahda.co.uk ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .journal-hero {
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 80% 32%, rgb(255 255 255 / 0.07), transparent 26%),
+      #111512;
+    color: var(--white);
+  }
+
+  .journal-hero__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: clamp(3rem, 8vw, 8rem);
+    min-height: min(800px, calc(100svh - 7rem));
+    padding-block: clamp(4rem, 8vw, 7rem);
+  }
+
+  .journal-hero__arabic {
+    margin-top: 1.5rem;
+    color: #d1e5d7;
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.6rem);
+    direction: rtl;
+  }
+
+  .journal-hero h1 {
+    font-size: clamp(4.2rem, 10vw, 9rem);
+    line-height: 0.85;
+  }
+
+  .journal-hero__tagline {
+    margin-top: 1.2rem;
+    color: #ff9eaa;
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+  }
+
+  .journal-hero__intro {
+    max-width: 62ch;
+    margin-top: 1.4rem;
+    color: rgb(255 255 255 / 0.72);
+    font-size: 1.08rem;
+  }
+
+  .relationship {
+    max-width: 65ch;
+    margin-top: 1.5rem;
+    padding: 1rem 1.1rem;
+    border-left: 3px solid var(--red);
+    background: rgb(255 255 255 / 0.06);
+    color: rgb(255 255 255 / 0.67);
+    font-size: 0.86rem;
+  }
+
+  .journal-hero__cover {
+    position: relative;
+    display: grid;
+    place-items: center;
+    margin: 0;
+  }
+
+  .journal-hero__cover :global(img) {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 470px);
+    max-height: 640px;
+    object-fit: contain;
+    border-radius: 0.35rem;
+    box-shadow: 0 45px 90px rgb(0 0 0 / 0.55);
+    transform: rotate(3deg);
+  }
+
+  .journal-hero__orbit {
+    position: absolute;
+    width: 120%;
+    aspect-ratio: 1;
+    border: 1px solid rgb(255 255 255 / 0.15);
+    border-radius: 50%;
+  }
+
+  .journal-hero__cover figcaption {
+    position: relative;
+    z-index: 2;
+    margin-top: 2rem;
+    color: rgb(255 255 255 / 0.56);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .founder {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding-block: clamp(2.5rem, 4.5vw, 4rem);
+    background: #101c17;
+    color: var(--white);
+  }
+
+  .founder::before {
+    position: absolute;
+    z-index: -1;
+    width: min(42rem, 70vw);
+    aspect-ratio: 1;
+    left: -22rem;
+    bottom: -30rem;
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 5rem rgb(255 255 255 / 0.018),
+      0 0 0 10rem rgb(255 255 255 / 0.012);
+    content: "";
+  }
+
+  .founder__panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: var(--radius-lg);
+    background:
+      radial-gradient(circle at 14% 0%, rgb(45 123 74 / 0.32), transparent 27rem),
+      #14251e;
+    box-shadow: 0 2rem 5rem rgb(0 0 0 / 0.22);
+  }
+
+  .founder__copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(1.8rem, 4vw, 3.5rem);
+  }
+
+  .founder__copy h2 {
+    max-width: 14ch;
+    margin-top: 1.1rem;
+    color: var(--white);
+    font-size: clamp(2.5rem, 4.5vw, 4.35rem);
+    line-height: 0.98;
+  }
+
+  .founder__lead {
+    max-width: 62ch;
+    margin-top: clamp(1.2rem, 2.5vw, 1.7rem);
+    color: rgb(255 255 255 / 0.82);
+    font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+    line-height: 1.72;
+  }
+
+  .founder__copy .button-row {
+    align-items: center;
+    margin-top: 1.6rem;
+  }
+
+  .founder__journal-link {
+    color: #ffadb8;
+  }
+
+  .founder__profile {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    margin: 0;
+    padding: clamp(0.8rem, 1.5vw, 1.1rem);
+    background: #efe5d4;
+    color: var(--ink);
+  }
+
+  .founder__portrait-frame {
+    position: relative;
+    flex: 1 1 auto;
+    overflow: hidden;
+    min-height: 21rem;
+    border-radius: calc(var(--radius-lg) - 0.65rem) calc(var(--radius-lg) - 0.65rem) 0 0;
+    background: #202421;
+  }
+
+  .founder__portrait-frame :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: saturate(0.72) contrast(1.03);
+    transition: filter 300ms ease, transform 500ms ease;
+  }
+
+  .founder__profile:hover .founder__portrait-frame :global(img) {
+    filter: saturate(1) contrast(1.02);
+    transform: scale(1.015);
+  }
+
+  .founder__portrait-mark {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    width: 7rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid rgb(255 255 255 / 0.75);
+    border-radius: 4px 0 0;
+    background: rgb(255 253 250 / 0.96);
+    box-shadow: 0 0.8rem 2rem rgb(0 0 0 / 0.24);
+  }
+
+  .founder__portrait-mark :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .founder__profile figcaption {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0.35rem 0.2rem;
+  }
+
+  .founder__profile figcaption > span {
+    color: var(--red-deep);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .founder__profile figcaption strong {
+    margin-top: 0.55rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 2.3vw, 2.15rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.04;
+  }
+
+  .founder__profile figcaption small {
+    margin-top: 0.65rem;
+    color: var(--muted);
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .current-issue__grid {
+    display: grid;
+    grid-template-columns: 0.75fr 1.25fr;
+    align-items: center;
+    gap: clamp(3rem, 9vw, 8rem);
+  }
+
+  .current-issue__cover {
+    display: flex;
+    justify-content: center;
+  }
+
+  .current-issue__cover :global(img) {
+    width: min(100%, 430px);
+    max-height: 620px;
+    object-fit: contain;
+    box-shadow: var(--shadow);
+    transform: rotate(-2deg);
+  }
+
+  .current-issue h2 {
+    margin-top: 0.5rem;
+    font-size: clamp(4rem, 9vw, 7.5rem);
+  }
+
+  .current-issue__lead {
+    margin-top: 1rem;
+  }
+
+  .current-issue ol {
+    padding: 0;
+    margin: 1.8rem 0;
+    list-style: none;
+    border-top: 1px solid var(--cream-deep);
+  }
+
+  .current-issue li {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1rem;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--cream-deep);
+  }
+
+  .current-issue li > span {
+    color: var(--red);
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  .current-issue li strong,
+  .current-issue li small {
+    display: block;
+  }
+
+  .current-issue li small {
+    margin-top: 0.15rem;
+    color: var(--muted);
+  }
+
+  .archive__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 3rem);
+    margin-top: 3rem;
+  }
+
+  .archive a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 180ms ease;
+  }
+
+  .archive a:hover {
+    transform: translateY(-0.5rem);
+  }
+
+  .archive a :global(img) {
+    width: 100%;
+    max-height: 570px;
+    object-fit: contain;
+    filter: drop-shadow(0 24px 26px rgb(0 0 0 / 0.2));
+  }
+
+  .archive a span {
+    margin-top: 1.3rem;
+    color: var(--red-deep);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .archive a strong {
+    margin-top: 0.25rem;
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+  }
+
+  .disciplines {
+    padding-block: var(--section-space);
+    background: var(--green-deep);
+    color: var(--white);
+  }
+
+  .disciplines__grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: center;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .disciplines h2 {
+    margin-top: 1rem;
+  }
+
+  .disciplines ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .disciplines li {
+    padding: 0.65rem 0.9rem;
+    border: 1px solid rgb(255 255 255 / 0.24);
+    border-radius: 999px;
+    color: rgb(255 255 255 / 0.78);
+  }
+
+  .source-section__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 7vw, 7rem);
+    padding: clamp(2rem, 6vw, 5rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+
+  .source-section h2 {
+    margin-top: 1rem;
+  }
+
+  .source-section__inner > div:last-child > p {
+    margin-bottom: 1.5rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 840px) {
+    .journal-hero__grid,
+    .founder__panel,
+    .current-issue__grid,
+    .disciplines__grid,
+    .source-section__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .journal-hero__cover :global(img) {
+      max-height: 540px;
+    }
+
+    .founder__copy {
+      max-width: none;
+    }
+
+    .founder__portrait-frame {
+      min-height: 0;
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .founder__panel {
+      border-radius: var(--radius);
+    }
+
+    .founder__copy {
+      padding: 1.7rem 1.25rem 2rem;
+    }
+
+    .founder__profile {
+      padding: 0.8rem;
+    }
+
+    .archive__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .archive a :global(img) {
+      max-height: 510px;
+    }
+  }
+</style>

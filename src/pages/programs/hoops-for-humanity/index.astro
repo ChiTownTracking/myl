@@ -1,0 +1,297 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../../layouts/Layout.astro";
+import PageHero from "../../../components/PageHero.astro";
+import SectionIntro from "../../../components/SectionIntro.astro";
+import teamImage from "../../../assets/images/hoops4humanity/myl-basketball.png";
+import actionImage from "../../../assets/images/hoops4humanity/basketball-1.png";
+---
+
+<Layout
+  title="Hoops 4 Humanity"
+  description="Discover Hoops 4 Humanity, MYL Canada’s community basketball space for teamwork, fellowship and service-minded action."
+  image={teamImage}
+>
+  <main id="main">
+    <PageHero
+      eyebrow="Sport · fellowship · purpose"
+      title="The score matters. What we build matters more."
+      intro="Hoops 4 Humanity brings young people onto the same court to compete, connect and direct that energy toward a community-minded purpose."
+      image={teamImage}
+      imageAlt="A large group of players, volunteers and families at a MYL Canada basketball gathering"
+      tone="red"
+      meta={[
+        { label: "Format", value: "Community basketball" },
+        { label: "Focus", value: "Teamwork & belonging" },
+        { label: "Updates", value: "@mylcanada" },
+      ]}
+    />
+
+    <section class="section why-hoops">
+      <div class="shell why-hoops__grid">
+        <div>
+          <p class="eyebrow">Why hoops?</p>
+          <h2>A simple game can open a bigger door.</h2>
+        </div>
+        <div class="prose">
+          <p class="lead">
+            Recreation is part of community formation. A court makes room for movement, healthy
+            competition, friendship and the kind of trust that grows by showing up for a team.
+          </p>
+          <p>
+            MYL Canada’s public programming includes basketball and other youth-focused social
+            activities. Hoops 4 Humanity gives that work a clear identity: connect, act and make an
+            impact beyond yourself.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--cream values">
+      <div class="shell">
+        <SectionIntro
+          eyebrow="More than a run"
+          title="Four wins that outlast the game."
+          intro="The strongest result is a youth community that knows how to play together and serve together."
+        />
+        <div class="values__grid">
+          <article><span>01</span><h3>Belonging</h3><p>A low-pressure way to meet people and become part of the community.</p></article>
+          <article><span>02</span><h3>Teamwork</h3><p>Communication, trust and shared responsibility practiced in real time.</p></article>
+          <article><span>03</span><h3>Wellbeing</h3><p>Movement, recreation and healthy competition as part of a balanced life.</p></article>
+          <article><span>04</span><h3>Purpose</h3><p>An invitation to think beyond personal performance and toward collective impact.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section action">
+      <div class="shell action__grid">
+        <figure>
+          <Image
+            src={actionImage}
+            alt="A player taking a contested shot during a Hoops 4 Humanity basketball game"
+            widths={[650, 1073]}
+            sizes="(max-width: 850px) 92vw, 48vw"
+            format="webp"
+            quality={88}
+          />
+        </figure>
+        <div>
+          <p class="eyebrow">On the court</p>
+          <h2>Bring effort. Bring respect. Bring the team.</h2>
+          <p class="lead action__lead">
+            MYL’s confirmed basketball programming has included pick-up sessions as well as larger
+            community gatherings. The format can change; the standard stays the same.
+          </p>
+          <ul>
+            <li><span>Show up ready</span><p>Check the official post for eligibility, timing and capacity.</p></li>
+            <li><span>Compete well</span><p>Intensity and character belong on the same court.</p></li>
+            <li><span>Stay connected</span><p>Let the final whistle be the beginning of community, not the end.</p></li>
+          </ul>
+          <a class="text-link" href="https://www.eventbrite.ca/o/myl-muslim-youth-league-canada-54899574643" target="_blank" rel="noreferrer">Check MYL Eventbrite ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="photo-band">
+      <Image
+        src={teamImage}
+        alt="The Hoops 4 Humanity community gathered for a group photograph"
+        widths={[900, 1600, 2400]}
+        sizes="100vw"
+        format="webp"
+        quality={82}
+      />
+      <div class="photo-band__caption shell">
+        <span>Connect</span><i></i><span>Act</span><i></i><span>Impact</span>
+      </div>
+    </section>
+
+    <section class="section section--compact">
+      <div class="shell cta-band">
+        <p class="eyebrow eyebrow--light">Next game</p>
+        <h2>Watch the official feed for registration.</h2>
+        <p>MYL Canada posts current sport sessions, age or eligibility notes, and venue details on its official channels.</p>
+        <div class="button-row">
+          <a class="button button--light" href="https://www.instagram.com/mylcanada/" target="_blank" rel="noreferrer">Follow @mylcanada ↗</a>
+          <a class="button button--ghost" href="/get-involved/">Help organize</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .why-hoops__grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .why-hoops h2 {
+    max-width: 11ch;
+    margin-top: 1rem;
+  }
+
+  .values__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .values article {
+    min-height: 300px;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--white);
+  }
+
+  .values article > span {
+    color: var(--red);
+    font-size: 0.74rem;
+    font-weight: 800;
+  }
+
+  .values h3 {
+    margin-top: 4.5rem;
+  }
+
+  .values article p {
+    margin-top: 0.75rem;
+    color: var(--muted);
+  }
+
+  .action__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: clamp(2.5rem, 7vw, 6rem);
+  }
+
+  .action figure {
+    margin: 0;
+    overflow: hidden;
+    min-height: 620px;
+    border-radius: var(--radius-lg);
+    background: var(--cream);
+  }
+
+  .action figure :global(img) {
+    width: 100%;
+    height: 100%;
+    min-height: 620px;
+    object-fit: cover;
+  }
+
+  .action h2 {
+    margin-top: 1rem;
+  }
+
+  .action__lead {
+    margin-top: 1.4rem;
+  }
+
+  .action ul {
+    padding: 0;
+    margin: 1.6rem 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .action li {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 1rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .action li span {
+    color: var(--red-deep);
+    font-weight: 800;
+  }
+
+  .action li p {
+    color: var(--muted);
+  }
+
+  .photo-band {
+    position: relative;
+    overflow: hidden;
+    min-height: min(72vw, 780px);
+    background: var(--green-deep);
+  }
+
+  .photo-band :global(img) {
+    width: 100%;
+    height: 100%;
+    min-height: min(72vw, 780px);
+    object-fit: cover;
+  }
+
+  .photo-band::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgb(0 0 0 / 0.72), transparent 45%);
+  }
+
+  .photo-band__caption {
+    position: absolute;
+    z-index: 1;
+    inset: auto 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 5vw, 4rem);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2.2vw, 1.5rem);
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .photo-band__caption i {
+    width: 0.5rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--red);
+  }
+
+  .cta-band > p:not(.eyebrow) {
+    max-width: 56ch;
+    margin-top: 1.2rem;
+    color: rgb(255 255 255 / 0.78);
+  }
+
+  .cta-band h2 {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 850px) {
+    .why-hoops__grid,
+    .action__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .values__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .values__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .values article {
+      min-height: 230px;
+    }
+
+    .action figure,
+    .action figure :global(img) {
+      min-height: 420px;
+    }
+  }
+</style>

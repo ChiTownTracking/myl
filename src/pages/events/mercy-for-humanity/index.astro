@@ -1,0 +1,316 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../../layouts/Layout.astro";
+import PageHero from "../../../components/PageHero.astro";
+import SectionIntro from "../../../components/SectionIntro.astro";
+import { mercyEditions, sourceLinks } from "../../../data/site.js";
+import heroImage from "../../../assets/images/al-rahma-conference/shaykh-hammad-facing-crowd.png";
+import image2021 from "../../../assets/images/mercy-conference/2021/mercy-2021-audience.jpg";
+import image2022 from "../../../assets/images/mercy-conference/2022/mercy-2022-keynote.jpg";
+import image2023 from "../../../assets/images/mercy-conference/2023/mercy-2023-keynote.jpg";
+import image2023Audience from "../../../assets/images/mercy-conference/2023/mercy-2023-audience.jpg";
+
+const editionImages = [image2021, image2022, image2023];
+const editionAlts = [
+  "Audience at the first Al-Rahma conference in 2021",
+  "Shaykh Hammad Mustafa addressing the second Al-Rahma conference in 2022",
+  "Shaykh Hammad Mustafa delivering the keynote at the third Al-Rahma conference in 2023",
+];
+
+const eventSchema = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  name: "Third Annual Al-Rahma (Mercy for Humanity) Conference",
+  startDate: "2023-11-18",
+  eventStatus: "https://schema.org/EventCompleted",
+  location: {
+    "@type": "Place",
+    name: "The International Centre",
+    address: "6900 Airport Rd, Mississauga, ON",
+  },
+  organizer: { "@type": "Organization", name: "Muslim Youth League Canada" },
+  performer: { "@type": "Person", name: "Shaykh Hammad Mustafa al-Madani al-Qadri" },
+};
+---
+
+<Layout
+  title="Al-Rahma Conference"
+  description="Explore the verified history of MYL Canada’s Al-Rahma (Mercy for Humanity) conferences in 2021, 2022 and 2023."
+  image={heroImage}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(eventSchema)}></script>
+  <main id="main">
+    <PageHero
+      eyebrow="MYL Canada flagship conference"
+      title="Mercy is not a theme. It is a way of being."
+      intro="Al-Rahma (Mercy for Humanity) brings Canadian youth, scholars and community leaders together to encounter the Prophetic model of compassion, dignity, peace and justice."
+      image={heroImage}
+      imageAlt="Shaykh Hammad Mustafa al-Madani al-Qadri addressing a full MYL Canada conference audience"
+      meta={[
+        { label: "Confirmed editions", value: "2021 · 2022 · 2023" },
+        { label: "City", value: "Mississauga, Ontario" },
+        { label: "Latest confirmed edition", value: "November 18, 2023" },
+      ]}
+    />
+
+    <section class="section section--compact section--cream editions">
+      <div class="shell">
+        <SectionIntro
+          eyebrow="Conference history"
+          title="Three years of a growing conversation."
+        />
+        <ol class="editions__list">
+          {
+            mercyEditions.map((edition, index) => (
+              <li class:list={["edition", index % 2 === 1 && "edition--flip"]}>
+                <figure class="edition__media">
+                  <Image
+                    src={editionImages[index]}
+                    alt={editionAlts[index]}
+                    widths={[600, 1000]}
+                    sizes="(max-width: 860px) 92vw, 47vw"
+                    format="webp"
+                    quality={86}
+                  />
+                  <span>{edition.year}</span>
+                </figure>
+                <div class="edition__copy">
+                  <p class="edition__date">{edition.date}</p>
+                  <h3>{edition.title}</h3>
+                  <p class="edition__venue">{edition.venue}</p>
+                  <p>{edition.summary}</p>
+                  <p class="edition__speakers">{edition.speakers}</p>
+                  <a class="text-link" href={edition.source} target="_blank" rel="noreferrer">
+                    Read the official report
+                  </a>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="section third-edition">
+      <div class="shell third-edition__grid">
+        <div class="third-edition__copy">
+          <p class="eyebrow">Inside the 2023 keynote</p>
+          <h2>The final sermon as a code of humanity.</h2>
+          <p class="lead">
+            Shaykh Hammad Mustafa al-Madani al-Qadri’s address connected the Prophet’s ﷺ farewell
+            sermon to the moral demands of the present.
+          </p>
+          <ul>
+            <li>Mercy and compassion as public as well as private virtues</li>
+            <li>Equality beyond race, gender, wealth and social hierarchy</li>
+            <li>The dignity and honour owed to every human being</li>
+            <li>Knowledge and literacy as foundations of Islamic life</li>
+            <li>Justice and clemency as measures of leadership</li>
+          </ul>
+          <p class="source-note">
+            Source: <a href={sourceLinks.mercy2023} target="_blank" rel="noreferrer">official 2023 conference recap ↗</a>
+          </p>
+        </div>
+        <figure class="third-edition__image">
+          <Image
+            src={image2023Audience}
+            alt="A large audience at the Third Annual Al-Rahma Conference in Mississauga"
+            widths={[680, 1100]}
+            sizes="(max-width: 900px) 92vw, 52vw"
+            format="webp"
+            quality={86}
+          />
+          <figcaption>
+            November 18, 2023 · The International Centre · 6900 Airport Rd, Mississauga
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section--compact">
+      <div class="shell cta-band">
+        <p class="eyebrow eyebrow--light">Carry the message forward</p>
+        <h2>Let mercy become visible in what we build.</h2>
+        <p>Follow MYL Canada for future conference announcements and opportunities to volunteer.</p>
+        <div class="button-row">
+          <a class="button button--light" href="https://www.instagram.com/mylcanada/" target="_blank" rel="noreferrer">Conference updates ↗</a>
+          <a class="button button--ghost" href="/get-involved/">Join the event team</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .editions__list {
+    display: grid;
+    gap: clamp(4rem, 9vw, 8rem);
+    padding: 0;
+    margin-top: clamp(2rem, 4vw, 3.5rem);
+    list-style: none;
+  }
+
+  .edition {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: clamp(2rem, 7vw, 6rem);
+  }
+
+  .edition--flip .edition__media {
+    order: 2;
+  }
+
+  .edition__media {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    min-height: 460px;
+    border-radius: var(--radius-lg);
+    background: var(--green-deep);
+  }
+
+  .edition__media :global(img) {
+    width: 100%;
+    height: 100%;
+    min-height: 460px;
+    object-fit: cover;
+  }
+
+  .edition__media > span {
+    position: absolute;
+    right: 1rem;
+    bottom: -0.4rem;
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 9vw, 8rem);
+    font-weight: 800;
+    letter-spacing: -0.08em;
+    line-height: 1;
+    text-shadow: 0 4px 24px rgb(0 0 0 / 0.45);
+  }
+
+  .edition__date,
+  .edition__venue {
+    color: var(--red-deep);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .edition h3 {
+    margin-top: 0.7rem;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .edition__venue {
+    margin-top: 1.1rem;
+    color: var(--green);
+  }
+
+  .edition__copy > p:not(.edition__date, .edition__venue, .edition__speakers) {
+    margin-top: 1.1rem;
+    color: var(--muted);
+    font-size: 1.03rem;
+  }
+
+  .edition__speakers {
+    margin: 1.2rem 0 1.5rem;
+    padding: 1rem 0 1rem 1rem;
+    border-left: 3px solid var(--red);
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .third-edition__grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    align-items: center;
+    gap: clamp(2.5rem, 7vw, 6rem);
+  }
+
+  .third-edition h2 {
+    margin-top: 1rem;
+  }
+
+  .third-edition .lead {
+    margin-top: 1.4rem;
+  }
+
+  .third-edition__copy ul {
+    display: grid;
+    gap: 0.65rem;
+    padding: 0;
+    margin: 1.6rem 0;
+    list-style: none;
+  }
+
+  .third-edition__copy li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--muted);
+  }
+
+  .third-edition__copy li::before {
+    content: "";
+    position: absolute;
+    width: 0.48rem;
+    aspect-ratio: 1;
+    left: 0;
+    top: 0.62em;
+    border-radius: 50%;
+    background: var(--red);
+  }
+
+  .third-edition__image {
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--cream);
+  }
+
+  .third-edition__image :global(img) {
+    width: 100%;
+    min-height: 560px;
+    object-fit: cover;
+  }
+
+  .third-edition__image figcaption {
+    padding: 0.9rem 1rem;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .cta-band > p:not(.eyebrow) {
+    max-width: 54ch;
+    margin-top: 1.2rem;
+    color: rgb(255 255 255 / 0.78);
+  }
+
+  .cta-band h2 {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    .edition,
+    .third-edition__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .edition--flip .edition__media {
+      order: 0;
+    }
+
+    .third-edition__image :global(img) {
+      min-height: 420px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .edition__media,
+    .edition__media :global(img) {
+      min-height: 340px;
+    }
+  }
+</style>

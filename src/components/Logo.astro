@@ -1,0 +1,111 @@
+---
+import { Image } from "astro:assets";
+import logoImage from "../assets/images/logo/myl_logo.png";
+import { organization } from "../data/site.js";
+
+interface Props {
+  size?: number;
+  tone?: "dark" | "light";
+  showText?: boolean;
+  stacked?: boolean;
+  priority?: boolean;
+}
+
+const {
+  size = 54,
+  tone = "dark",
+  showText = true,
+  stacked = false,
+  priority = false,
+} = Astro.props;
+---
+
+<span
+  class:list={[
+    "brand-lockup",
+    `brand-lockup--${tone}`,
+    stacked && "brand-lockup--stacked",
+  ]}
+>
+  <Image
+    class="brand-lockup__mark"
+    src={logoImage}
+    alt={showText ? "" : organization.name}
+    width={size}
+    height={size}
+    loading={priority ? "eager" : "lazy"}
+    decoding="async"
+  />
+
+  {
+    showText && (
+      <span class="brand-lockup__copy">
+        <span class="brand-lockup__name">{organization.shortName}</span>
+        <span class="brand-lockup__motto">{organization.motto}</span>
+      </span>
+    )
+  }
+</span>
+
+<style>
+  .brand-lockup {
+    --brand-lockup-color: var(--ink, #171d1a);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.72rem;
+    color: var(--brand-lockup-color);
+  }
+
+  .brand-lockup--light {
+    --brand-lockup-color: #fff;
+  }
+
+  .brand-lockup__mark {
+    flex: 0 0 auto;
+    border-radius: 50%;
+  }
+
+  .brand-lockup__copy {
+    display: grid;
+    gap: 0.24rem;
+    min-width: 0;
+    line-height: 1;
+  }
+
+  .brand-lockup__name {
+    color: inherit;
+    font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+    font-size: clamp(0.94rem, 1.2vw, 1.08rem);
+    font-weight: 800;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .brand-lockup__motto {
+    color: inherit;
+    font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+    font-size: 0.62rem;
+    font-weight: 650;
+    letter-spacing: 0.13em;
+    opacity: 0.68;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .brand-lockup--stacked {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .brand-lockup--stacked .brand-lockup__copy {
+    gap: 0.34rem;
+  }
+
+  @media (max-width: 420px) {
+    .brand-lockup__motto {
+      display: none;
+    }
+  }
+</style>

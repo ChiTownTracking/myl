@@ -1,0 +1,113 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { organization } from "../data/site.js";
+---
+
+<Layout
+  title="Privacy"
+  description="Privacy information for the Muslim Youth League Canada website."
+>
+  <main id="main">
+    <header class="legal-hero">
+      <div class="shell">
+        <p class="eyebrow eyebrow--light">Privacy</p>
+        <h1>Clear, simple and proportionate.</h1>
+        <p>Last updated August 17, 2026</p>
+      </div>
+    </header>
+
+    <section class="section legal-content">
+      <div class="shell legal-content__grid">
+        <aside>
+          <p>This page describes the current static website. It should be updated if forms, analytics, donations or member accounts are added later.</p>
+        </aside>
+        <div class="prose">
+          <h2>What this website collects</h2>
+          <p>
+            This website does not currently provide user accounts, collect form submissions, run
+            behavioural analytics or set advertising cookies. MYL Canada does not receive personal
+            information simply because you read these pages.
+          </p>
+
+          <h2>When you contact MYL Canada</h2>
+          <p>
+            Email and phone links open your own communications application. If you contact MYL
+            Canada, the information you choose to provide will be used to understand and respond to
+            your enquiry. Avoid sending sensitive information unless the team specifically requests
+            it through an appropriate channel.
+          </p>
+
+          <h2>Third-party services</h2>
+          <p>
+            This site links to Instagram, Facebook, LinkedIn, YouTube, Eventbrite, Google Maps,
+            Al-Hidayah, Al-Nahda, MMCC and Minhaj websites. Those services have their own privacy
+            practices. The site also requests web fonts from Google Fonts, which may receive basic
+            connection information such as your IP address and browser details.
+          </p>
+
+          <h2>Event photography</h2>
+          <p>
+            The site uses supplied MYL Canada images and official event photography from linked
+            reports. If you appear in an image and have a concern about its use, contact the team
+            with the page URL and a clear description of the photograph.
+          </p>
+
+          <h2>Questions or removal requests</h2>
+          <p>
+            Email <a href={`mailto:${organization.email}`}>{organization.email}</a> or call <a href={`tel:${organization.phoneHref}`}>{organization.phone}</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .legal-hero {
+    padding-block: clamp(6rem, 12vw, 10rem);
+    background: var(--green-deep);
+    color: var(--white);
+  }
+
+  .legal-hero h1 {
+    max-width: 12ch;
+    margin-top: 1rem;
+    font-size: clamp(3rem, 7vw, 6rem);
+  }
+
+  .legal-hero p:last-child {
+    margin-top: 1.5rem;
+    color: rgb(255 255 255 / 0.58);
+  }
+
+  .legal-content__grid {
+    display: grid;
+    grid-template-columns: 0.55fr 1.45fr;
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .legal-content aside {
+    position: sticky;
+    top: 9rem;
+    padding: 1.2rem;
+    border-left: 4px solid var(--red);
+    background: var(--red-soft);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .legal-content h2 {
+    font-size: clamp(1.7rem, 3vw, 2.35rem);
+  }
+
+  @media (max-width: 760px) {
+    .legal-content__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .legal-content aside {
+      position: static;
+    }
+  }
+</style>
