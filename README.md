@@ -1,46 +1,47 @@
-# Astro Starter Kit: Basics
+# MYL Canada website
+
+A static, multi-page Astro website for Muslim Youth League Canada. The site uses locally stored,
+optimized event photography and the supplied MYL Canada logo.
+
+## Main routes
+
+- `/` — home
+- `/about/` — organization and mission
+- `/programs/` — MYL-led programming and related initiatives
+- `/events/` — event overview
+- `/events/mercy-for-humanity/` — sourced 2021–2023 conference archive
+- `/events/al-hidayah/` — MQI Canada retreat and MYL volunteer relationship
+- `/programs/hoops-for-humanity/` — basketball program
+- `/renaissance/` — related Al-Nahda journal resource
+- `/gallery/`, `/get-involved/`, `/contact/`, `/privacy/`
+
+## Development
+
+Install dependencies with `npm install`, then use Astro's background development server:
 
 ```sh
-npm create astro@latest -- --template basics
+npm run astro -- dev --background
+npm run astro -- dev status
+npm run astro -- dev logs
+npm run astro -- dev stop
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Create a production build with:
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```sh
+npm run build
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Before launch, set Astro's `site` value in `astro.config.mjs` to the final production domain. That
+enables absolute canonical and social-image URLs without guessing a domain during development.
 
-## 🧞 Commands
+## Content and media
 
-All commands are run from the root of the project, from a terminal:
+Shared organization details, navigation, social links and conference source URLs live in
+`src/data/site.js`. Local media lives in `src/assets/images/` and is rendered with Astro's image
+pipeline. Historical claims on the Al-Rahma (Mercy for Humanity) page link back to the official MMCC Canada
+or Minhaj reports used to verify them.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Al-Hidayah is identified as an MQI Canada initiative supported by MYL Canada volunteers.
+Renaissance / Al-Nahda is identified as a related intellectual resource, not an MYL-owned
+publication.
