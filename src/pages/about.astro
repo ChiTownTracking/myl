@@ -1,11 +1,81 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/PageHero.astro";
+import SlimHero from "../components/SlimHero.astro";
 import SectionIntro from "../components/SectionIntro.astro";
 import qaGroup from "../assets/images/myl-qa-2026/myl-qa-2026-stage.jpg";
-import qaDiscussion from "../assets/images/myl-qa-2026/myl-qa-2026-discussion.jpg";
 import hoodieImage from "../assets/images/herosection/myl-back-hoodies.png";
+import aliAhmedMalikPortrait from "../assets/images/podcast/team/ali-ahmed-malik.jpg";
+import talhaMustafaviPortrait from "../assets/images/podcast/team/talha-mustafavi.png";
+import muzammilShariefPortrait from "../assets/images/leadership/muzammil-sharief.png";
+import hammadAnwarPortrait from "../assets/images/leadership/hammad-anwar.png";
+import jafferShariefPortrait from "../assets/images/leadership/jaffer-sharief.jpg";
+
+const leaders = [
+  {
+    name: "Muzammil Sharief",
+    role: "President",
+    image: muzammilShariefPortrait,
+    initials: "MS",
+    bio: "Muzammil helps shape MYL Canada’s direction, bringing the team around a shared purpose and creating more room for young people to lead.",
+  },
+  {
+    name: "Ali Ahmed Malik",
+    role: "General Secretary",
+    image: aliAhmedMalikPortrait,
+    initials: "AM",
+    bio: "Ali keeps communication and day-to-day coordination moving, helping the team turn good ideas into organized, meaningful work.",
+  },
+  {
+    name: "Muhammad Talha Mustafavi",
+    role: "Assistant General Secretary",
+    image: talhaMustafaviPortrait,
+    initials: "TM",
+    bio: "Talha supports the wider team across projects, connecting people and practical details so each initiative can move forward with care.",
+  },
+  {
+    name: "Jaffer Sharief",
+    role: "Chapters Coordinator",
+    image: jafferShariefPortrait,
+    initials: "JS",
+    bio: "Jaffer supports MYL chapters as they grow locally, helping teams stay connected and share a consistent sense of purpose across communities.",
+  },
+  {
+    name: "Hammad Anwar",
+    role: "Joint Secretary",
+    image: hammadAnwarPortrait,
+    initials: "HA",
+    bio: "Hammad supports coordination across the leadership team, helping responsibilities stay connected and shared initiatives move forward together.",
+  },
+];
+
+const executiveMembers = [
+  "Ata Ul Mustafa",
+  "Abdul Qadir",
+  "Abdullah Sheikh",
+  "Akil",
+  "Anas Hasnain",
+  "Humaid",
+  "Ibrahim Sheikh",
+  "Abdullah Shahzad",
+  "Hassan Wah Wah",
+  "Jalal Taqui",
+  "Mohsin Khan",
+  "Ismael Sheikh",
+  "Abdul Naafe",
+  "Syed Azeemuddin Razvi",
+  "Umer Sharief",
+  "Abdul Rafeh",
+  "Syed Bilal",
+  "Talha Kamran",
+  "Wahaj Uddin",
+];
+
+const marqueeRows = [
+  executiveMembers.slice(0, 10),
+  executiveMembers.slice(5, 15),
+  executiveMembers.slice(10, 20),
+];
 ---
 
 <Layout
@@ -14,40 +84,95 @@ import hoodieImage from "../assets/images/herosection/myl-back-hoodies.png";
   image={qaGroup}
 >
   <main id="main">
-    <PageHero
+    <SlimHero
+      titleId="about-hero-title"
       eyebrow="About MYL Canada"
       title="Rooted in faith. Formed through service."
-      intro="Muslim Youth League Canada is a youth network creating meaningful spaces for young Muslims to deepen their faith, strengthen their identity and contribute to Canadian society with confidence and compassion."
-      image={qaGroup}
-      imageAlt="MYL Canada organizers and guests gathered after a 2026 youth question-and-answer session"
-      meta={[
+      intro="A youth network creating meaningful spaces for young Muslims to deepen their faith, strengthen their identity and contribute to Canadian society with confidence."
+      facts={[
         { label: "Established", value: "2016" },
         { label: "Based in", value: "Mississauga, Ontario" },
         { label: "Affiliation", value: "Minhaj-ul-Quran International" },
       ]}
     />
 
-    <section class="section story">
-      <div class="shell story__grid">
-        <div>
-          <p class="eyebrow">Our purpose</p>
-          <h2>Youth are not a side audience. They are the work.</h2>
+    <section class="section leadership" aria-labelledby="leadership-title">
+      <div class="shell">
+        <div class="leadership__heading">
+          <div>
+            <p class="eyebrow">The people behind MYL</p>
+            <h2 id="leadership-title">Meet our leaders.</h2>
+          </div>
+          <p class="leadership__intro">
+            MYL Canada is shaped by young people who plan, listen, organize and show up for their
+            communities. Meet the core team responsible for carrying that work forward.
+          </p>
         </div>
-        <div class="prose story__copy">
-          <p class="lead">
-            MYL Canada exists to educate and empower young Muslims navigating life in a Western
-            society—helping them hold Muslim and Canadian identity together with integrity.
-          </p>
-          <p>
-            That purpose comes alive through scholarship, spiritual gatherings, honest
-            conversations, sport, service and large community events. Young people are welcomed as
-            participants, but also invited to organize, communicate, host and lead.
-          </p>
-          <p>
-            MYL Canada is part of Minhaj-ul-Quran International’s wider youth network and works
-            alongside MQI Canada and community institutions on initiatives that support learning,
-            peace, moderation and social contribution.
-          </p>
+
+        <div class="leadership__stage">
+          <div class="leadership__behind-caption">
+            <span>20+ executive members</span>
+            <strong>The team behind the leaders</strong>
+            <i aria-hidden="true">↓</i>
+          </div>
+
+          <ul class="sr-only">
+            {executiveMembers.map((member) => <li>{member}</li>)}
+          </ul>
+
+          <div class="leadership__marquees" aria-hidden="true">
+            {
+              marqueeRows.map((row, rowIndex) => (
+                <div class:list={["executive-marquee", { "executive-marquee--reverse": rowIndex === 1 }]}>
+                  <div class="executive-marquee__track">
+                    {[0, 1].map(() => (
+                      <div class="executive-marquee__group">
+                        {row.map((member) => (
+                          <span class="executive-name">
+                            {member}
+                          </span>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+
+          <div class="leadership__grid">
+          {
+            leaders.map((leader, index) => (
+              <article class:list={["leader-card", { "leader-card--president": index === 0 }]}>
+                <div class="leader-card__media">
+                  {leader.image ? (
+                    <Image
+                      src={leader.image}
+                      alt={`Portrait of ${leader.name}`}
+                      widths={[360, 560, 760]}
+                      sizes="(max-width: 720px) 92vw, (max-width: 1000px) 42vw, 260px"
+                      format="webp"
+                      quality={88}
+                    />
+                  ) : (
+                    <div class="leader-card__placeholder" aria-label={`Portrait of ${leader.name} coming soon`}>
+                      <span>{leader.initials}</span>
+                      <small>Portrait coming soon</small>
+                    </div>
+                  )}
+                  <span class="leader-card__number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                </div>
+                <div class="leader-card__content">
+                  {index === 0 && <p class="leader-card__president-label">MYL Canada · National Leadership</p>}
+                  <p class="leader-card__role">{leader.role}</p>
+                  <h3>{leader.name}</h3>
+                  <p>{leader.bio}</p>
+                </div>
+              </article>
+            ))
+          }
+          </div>
+
         </div>
       </div>
     </section>
@@ -84,36 +209,6 @@ import hoodieImage from "../assets/images/herosection/myl-back-hoodies.png";
       </div>
     </section>
 
-    <section class="section approach">
-      <div class="shell split">
-        <figure class="approach__media">
-          <Image
-            src={qaDiscussion}
-            alt="Young people participating in a MYL Canada question-and-answer gathering"
-            widths={[650, 1000]}
-            sizes="(max-width: 900px) 92vw, 48vw"
-            format="webp"
-            quality={86}
-          />
-        </figure>
-        <div>
-          <p class="eyebrow">How we work</p>
-          <h2>Ask better questions. Build better spaces.</h2>
-          <p class="lead approach__lead">
-            Recent MYL conversations have explored identity, secularism, doubt, digital distraction,
-            artificial intelligence, character and community responsibility.
-          </p>
-          <ul class="approach__list">
-            <li><strong>Listen</strong><span>Begin with the realities young people are carrying.</span></li>
-            <li><strong>Learn</strong><span>Bring scholarship into open, relatable conversation.</span></li>
-            <li><strong>Practice</strong><span>Create opportunities to serve, organize and take responsibility.</span></li>
-            <li><strong>Belong</strong><span>Make friendship and spiritual companionship part of the journey.</span></li>
-          </ul>
-          <a class="text-link" href="/programs/">Explore the work</a>
-        </div>
-      </div>
-    </section>
-
     <section class="identity-band">
       <div class="shell identity-band__grid">
         <div>
@@ -131,31 +226,359 @@ import hoodieImage from "../assets/images/herosection/myl-back-hoodies.png";
       </div>
     </section>
 
-    <section class="section section--compact">
-      <div class="shell source-note">
-        Organization details on this page are informed by MYL Canada’s public profiles and official
-        Minhaj reports. <a href="https://ca.linkedin.com/company/muslim-youth-league-canada" target="_blank" rel="noreferrer"
-          >View the MYL Canada profile ↗</a
-        >
-      </div>
-    </section>
   </main>
 </Layout>
 
 <style>
-  .story__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(2rem, 8vw, 8rem);
+  .leadership {
+    overflow: hidden;
+    padding-top: clamp(3.5rem, 5vw, 5rem);
+    padding-bottom: clamp(1rem, 2vw, 1.75rem);
+    background: var(--cream);
   }
 
-  .story h2 {
-    max-width: 12ch;
+  .leadership__heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(19rem, 0.7fr);
+    align-items: end;
+    gap: clamp(2rem, 8vw, 7rem);
+  }
+
+  .leadership__heading h2 {
+    max-width: 11ch;
     margin-top: 1rem;
   }
 
-  .story__copy {
-    align-self: end;
+  .leadership__intro {
+    max-width: 48ch;
+    padding-bottom: 0.45rem;
+    color: var(--muted);
+    font-size: clamp(1.02rem, 1.6vw, 1.22rem);
+    line-height: 1.75;
+  }
+
+  .leadership__stage {
+    position: relative;
+    isolation: isolate;
+    padding-block: clamp(7rem, 8vw, 10rem) clamp(3rem, 3vw, 5rem);
+  }
+
+  .leadership__behind-caption {
+    position: absolute;
+    z-index: 3;
+    top: 2.25rem;
+    left: 50%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+    gap: 0.85rem;
+    width: max-content;
+    max-width: calc(100vw - (2 * var(--gutter)));
+    padding: 0.65rem 0.75rem 0.35rem 1.15rem;
+    border: 1px solid var(--cream-deep);
+    border-radius: 999px;
+    background: var(--paper);
+    box-shadow: var(--shadow-soft);
+    transform: translateX(-50%);
+  }
+
+  .leadership__behind-caption span {
+    color: var(--red-deep);
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .leadership__behind-caption strong {
+    padding-left: 0.85rem;
+    border-left: 1px solid var(--cream-deep);
+    font-size: 0.88rem;
+  }
+
+  .leadership__behind-caption i {
+    display: grid;
+    width: 2rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--red);
+    color: var(--white);
+    font-style: normal;
+    font-weight: 800;
+  }
+
+  .leadership__grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.25rem;
+    row-gap: clamp(1.25rem, 2.5vw, 2rem);
+  }
+
+  .leader-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(12rem, 0.78fr) minmax(0, 1.22fr);
+    min-height: 24rem;
+    overflow: hidden;
+    border: 1px solid var(--cream-deep);
+    border-radius: var(--radius-lg);
+    background: var(--paper);
+    box-shadow: 0 18px 45px rgb(21 61 43 / 0.07);
+  }
+
+  .leader-card--president {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(20rem, 0.72fr) minmax(0, 1.28fr);
+    height: 20rem;
+    min-height: 0;
+    border-color: var(--green-dark);
+    background: var(--green-dark);
+    color: var(--white);
+    box-shadow: 0 32px 75px rgb(12 44 30 / 0.22);
+  }
+
+  .leader-card--president::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: -10rem;
+    right: -8rem;
+    width: 24rem;
+    aspect-ratio: 1;
+    border: 3.5rem solid rgb(255 255 255 / 0.055);
+    border-radius: 50%;
+  }
+
+  .leader-card--president .leader-card__media,
+  .leader-card--president .leader-card__content {
+    z-index: 1;
+  }
+
+  .leader-card--president .leader-card__media :global(img) {
+    object-position: center 28%;
+  }
+
+  .leader-card__media {
+    position: relative;
+    min-height: 100%;
+    overflow: hidden;
+    background: var(--green-deep);
+  }
+
+  .leader-card__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: grayscale(1);
+    transition: filter 250ms ease, transform 350ms ease;
+  }
+
+  .leader-card:hover .leader-card__media :global(img) {
+    filter: grayscale(0.2);
+    transform: scale(1.025);
+  }
+
+  .leader-card__placeholder {
+    display: grid;
+    height: 100%;
+    min-height: 24rem;
+    place-content: center;
+    gap: 0.9rem;
+    background:
+      radial-gradient(circle at 24% 20%, rgb(255 255 255 / 0.12) 0 4rem, transparent 4.1rem),
+      linear-gradient(145deg, var(--green-deep), var(--green-dark));
+    color: var(--white);
+    text-align: center;
+  }
+
+  .leader-card:nth-child(4) .leader-card__placeholder {
+    background:
+      radial-gradient(circle at 76% 20%, rgb(255 255 255 / 0.12) 0 4rem, transparent 4.1rem),
+      linear-gradient(145deg, var(--red-deep), var(--red));
+  }
+
+  .leader-card__placeholder span {
+    font-family: var(--font-serif);
+    font-size: clamp(4rem, 7vw, 6rem);
+    line-height: 0.8;
+    letter-spacing: -0.08em;
+  }
+
+  .leader-card__placeholder small {
+    font-family: var(--font-display);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .leader-card__number {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    width: 3.4rem;
+    aspect-ratio: 1;
+    place-items: center;
+    background: var(--red);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 800;
+  }
+
+  .leader-card__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: clamp(1.6rem, 3.5vw, 2.65rem);
+  }
+
+  .leader-card__role {
+    color: var(--red-deep);
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .leader-card__president-label {
+    position: absolute;
+    top: 1.15rem;
+    left: clamp(1.25rem, 2.5vw, 2rem);
+    width: fit-content;
+    margin: 0;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgb(255 255 255 / 0.25);
+    color: rgb(255 255 255 / 0.62);
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .leader-card--president .leader-card__content {
+    justify-content: flex-end;
+    padding: clamp(1.25rem, 2.5vw, 2rem);
+  }
+
+  .leader-card--president .leader-card__role {
+    width: fit-content;
+    margin-top: 2.25rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: var(--red);
+    color: var(--white);
+  }
+
+  .leader-card h3 {
+    margin-top: 0.8rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3vw, 2.65rem);
+    font-weight: 600;
+    line-height: 0.98;
+  }
+
+  .leader-card--president h3 {
+    max-width: none;
+    margin-top: 0.8rem;
+    color: var(--white);
+    font-size: clamp(2.6rem, 3.8vw, 3.85rem);
+    line-height: 0.92;
+    letter-spacing: -0.065em;
+  }
+
+  .leader-card__content > p:last-child {
+    margin-top: 1.35rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .leader-card--president .leader-card__content > p:last-child {
+    max-width: 48ch;
+    margin-top: 0.9rem;
+    color: rgb(255 255 255 / 0.72);
+    font-size: clamp(0.9rem, 1.15vw, 1rem);
+    line-height: 1.5;
+  }
+
+  .leadership__marquees {
+    position: absolute;
+    z-index: 0;
+    top: 6rem;
+    bottom: 3rem;
+    left: 50%;
+    display: grid;
+    width: 100vw;
+    align-content: space-around;
+    gap: 1rem;
+    pointer-events: none;
+    transform: translateX(-50%) rotate(-1.25deg) scale(1.02);
+  }
+
+  .executive-marquee {
+    overflow: hidden;
+    padding-block: 0.2rem;
+    mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  }
+
+  .executive-marquee__track {
+    display: flex;
+    width: max-content;
+    gap: 1rem;
+    animation: executive-scroll 38s linear infinite;
+    will-change: transform;
+  }
+
+  .executive-marquee--reverse .executive-marquee__track {
+    animation-direction: reverse;
+    animation-duration: 52s;
+  }
+
+  .executive-marquee:nth-child(3) .executive-marquee__track {
+    animation-duration: 31s;
+  }
+
+  .executive-marquee__group {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 1rem;
+  }
+
+  .executive-name {
+    display: inline-flex;
+    min-height: 4.25rem;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 1.6rem;
+    border: 1px solid #cddcce;
+    border-radius: 999px;
+    background: var(--green-soft);
+    color: var(--green-dark);
+    font-family: var(--font-display);
+    font-size: clamp(0.85rem, 1.25vw, 1.05rem);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    white-space: nowrap;
+  }
+
+  .executive-marquee--reverse .executive-name {
+    border-color: #f1cbd1;
+    background: var(--red-soft);
+    color: var(--red-deep);
+  }
+
+  @keyframes executive-scroll {
+    to { transform: translateX(calc(-50% - 0.5rem)); }
   }
 
   .values__grid {
@@ -163,6 +586,10 @@ import hoodieImage from "../assets/images/herosection/myl-back-hoodies.png";
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
     margin-top: 3rem;
+  }
+
+  .values {
+    padding-top: clamp(1rem, 2vw, 1.75rem);
   }
 
   .values article {
@@ -190,55 +617,6 @@ import hoodieImage from "../assets/images/herosection/myl-back-hoodies.png";
 
   .values article p {
     margin-top: 0.85rem;
-    color: var(--muted);
-  }
-
-  .approach__media {
-    margin: 0;
-    overflow: hidden;
-    min-height: 600px;
-    border-radius: var(--radius-lg);
-    background: var(--green-deep);
-  }
-
-  .approach__media :global(img) {
-    width: 100%;
-    height: 100%;
-    min-height: 600px;
-    object-fit: cover;
-  }
-
-  .approach h2 {
-    margin-top: 1rem;
-  }
-
-  .approach__lead {
-    margin-top: 1.4rem;
-  }
-
-  .approach__list {
-    padding: 0;
-    margin: 2rem 0;
-    list-style: none;
-    border-block: 1px solid var(--line);
-  }
-
-  .approach__list li {
-    display: grid;
-    grid-template-columns: 6rem 1fr;
-    gap: 1rem;
-    padding-block: 0.9rem;
-  }
-
-  .approach__list li + li {
-    border-top: 1px solid var(--line);
-  }
-
-  .approach__list strong {
-    color: var(--green);
-  }
-
-  .approach__list span {
     color: var(--muted);
   }
 
@@ -299,8 +677,16 @@ import hoodieImage from "../assets/images/herosection/myl-back-hoodies.png";
   }
 
   @media (max-width: 900px) {
-    .story__grid,
+    .leadership__heading,
     .identity-band__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .leadership__intro {
+      padding-bottom: 0;
+    }
+
+    .leadership__grid {
       grid-template-columns: 1fr;
     }
 
@@ -317,7 +703,76 @@ import hoodieImage from "../assets/images/herosection/myl-back-hoodies.png";
     }
   }
 
+  @media (max-width: 720px) {
+    .leader-card--president {
+      grid-column: auto;
+      grid-template-columns: 1fr;
+      height: auto;
+      min-height: 0;
+    }
+
+    .leader-card--president .leader-card__media {
+      min-height: 0;
+      aspect-ratio: 16 / 10;
+    }
+
+    .leader-card--president .leader-card__content {
+      min-height: 18rem;
+    }
+  }
+
   @media (max-width: 620px) {
+    .leadership__stage {
+      padding-top: 9.5rem;
+    }
+
+    .leadership__behind-caption {
+      top: 2rem;
+      grid-template-columns: 1fr auto;
+      width: min(100%, 25rem);
+      border-radius: var(--radius);
+    }
+
+    .leadership__behind-caption span,
+    .leadership__behind-caption strong {
+      grid-column: 1;
+    }
+
+    .leadership__behind-caption strong {
+      padding: 0;
+      border: 0;
+    }
+
+    .leadership__behind-caption i {
+      grid-column: 2;
+      grid-row: 1 / 3;
+    }
+
+    .leader-card {
+      grid-template-columns: 1fr;
+    }
+
+    .leader-card__media,
+    .leader-card__placeholder {
+      min-height: 0;
+      aspect-ratio: 5 / 4;
+    }
+
+    .leader-card__content {
+      padding: 1.6rem;
+    }
+
+    .leadership__marquees {
+      top: 8.5rem;
+      bottom: 4rem;
+      transform: translateX(-50%) rotate(-1deg) scale(1.02);
+    }
+
+    .executive-name {
+      min-height: 3.75rem;
+      padding-inline: 1.25rem;
+    }
+
     .values__grid {
       grid-template-columns: 1fr;
     }
@@ -326,9 +781,15 @@ import hoodieImage from "../assets/images/herosection/myl-back-hoodies.png";
       min-height: 240px;
     }
 
-    .approach__media,
-    .approach__media :global(img) {
-      min-height: 390px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .executive-marquee__track {
+      animation-play-state: paused;
+    }
+
+    .leader-card__media :global(img) {
+      transition: none;
     }
   }
 </style>

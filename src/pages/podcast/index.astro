@@ -8,6 +8,11 @@ import dawahThumbnail from "../../assets/images/podcast/reviving-dawah.jpg";
 import charityThumbnail from "../../assets/images/podcast/hearts-that-give.jpg";
 import abuHanifaThumbnail from "../../assets/images/podcast/imam-abu-hanifa.jpg";
 import madhabsThumbnail from "../../assets/images/podcast/four-madhabs.jpg";
+import abdullahSheikhPortrait from "../../assets/images/podcast/team/abdullah-sheikh.png";
+import aliAhmedMalikPortrait from "../../assets/images/podcast/team/ali-ahmed-malik.jpg";
+import abdullahAlQadriPortrait from "../../assets/images/podcast/team/dr-abdullah-al-qadri.jpg";
+import talhaMustafaviPortrait from "../../assets/images/podcast/team/talha-mustafavi.png";
+import abdulQadirPortrait from "../../assets/images/podcast/team/abdul-qadir.png";
 import "../../styles/podcast.css";
 
 const channelUrl = "https://www.youtube.com/@tomorrowsummah";
@@ -87,10 +92,42 @@ const latestEpisode = episodes[0];
 const popularEpisode = episodes.find((episode) => episode.number === "05") ?? episodes[5];
 const archiveEpisodes = episodes.slice(1);
 
-const voices = [
-  { initials: "AM", name: "Ali Ahmed Malik", role: "Host", episode: "Guiding the Tomorrow's Ummah conversation" },
-  { initials: "AS", name: "Abdullah Sheikh", role: "Host", episode: "Tomorrow's Ummah Podcast" },
-  { initials: "AQ", name: "Dr. Abdullah Al-Qadri", role: "Guest", episode: "Imam Al-Ghazali: The Proof of Islam" },
+const team = [
+  {
+    initials: "AQ",
+    name: "Abdul Qadir",
+    role: "Podcast Production Lead",
+    image: abdulQadirPortrait,
+    alt: "Portrait of Abdul Qadir",
+  },
+  {
+    initials: "TM",
+    name: "Talha Mustafavi",
+    role: "Logistics Support",
+    image: talhaMustafaviPortrait,
+    alt: "Portrait of Talha Mustafavi",
+  },
+  {
+    initials: "AM",
+    name: "Ali Ahmed Malik",
+    role: "Host",
+    image: aliAhmedMalikPortrait,
+    alt: "Portrait of Ali Ahmed Malik",
+  },
+  {
+    initials: "AS",
+    name: "Abdullah Sheikh",
+    role: "Host",
+    image: abdullahSheikhPortrait,
+    alt: "Portrait of Abdullah Sheikh",
+  },
+  {
+    initials: "AQ",
+    name: "Dr. Abdullah Al-Qadri",
+    role: "Guest",
+    image: abdullahAlQadriPortrait,
+    alt: "Portrait of Dr. Abdullah Al-Qadri",
+  },
 ];
 ---
 
@@ -129,14 +166,10 @@ const voices = [
           </p>
 
           <div class="podcast-actions">
-            <a class="podcast-button" href={latestEpisode.href} target="_blank" rel="noopener noreferrer"><span class="podcast-button__play" aria-hidden="true">▶</span>Listen to latest episode</a>
+            <a class="podcast-button" href={latestEpisode.href} target="_blank" rel="noopener noreferrer"><svg class="podcast-button__youtube" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.58 7.19a2.95 2.95 0 0 0-2.08-2.08C17.66 4.6 12 4.6 12 4.6s-5.66 0-7.5.51a2.95 2.95 0 0 0-2.08 2.08A30.4 30.4 0 0 0 1.9 12a30.4 30.4 0 0 0 .52 4.81 2.95 2.95 0 0 0 2.08 2.08c1.84.51 7.5.51 7.5.51s5.66 0 7.5-.51a2.95 2.95 0 0 0 2.08-2.08A30.4 30.4 0 0 0 22.1 12a30.4 30.4 0 0 0-.52-4.81ZM10 15.2V8.8l5.5 3.2Z"></path></svg>Listen to latest episode</a>
             <a class="podcast-button podcast-button--outline" href="#episodes">Browse episodes</a>
           </div>
 
-          <a class="podcast-platform" href={channelUrl} target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true"><path d="M21.58 7.19a2.95 2.95 0 0 0-2.08-2.08C17.66 4.6 12 4.6 12 4.6s-5.66 0-7.5.51a2.95 2.95 0 0 0-2.08 2.08A30.4 30.4 0 0 0 1.9 12a30.4 30.4 0 0 0 .52 4.81 2.95 2.95 0 0 0 2.08 2.08c1.84.51 7.5.51 7.5.51s5.66 0 7.5-.51a2.95 2.95 0 0 0 2.08-2.08A30.4 30.4 0 0 0 22.1 12a30.4 30.4 0 0 0-.52-4.81ZM10 15.2V8.8l5.5 3.2Z"></path></svg>
-            <span><small>Watch every conversation on</small><strong>YouTube</strong></span><span aria-hidden="true">↗</span>
-          </a>
         </div>
       </section>
 
@@ -201,15 +234,38 @@ const voices = [
         </div>
       </section>
 
-      <section class="voices" id="guests" aria-labelledby="guests-title">
+      <section class="podcast-team" id="team" aria-labelledby="team-title">
         <div class="podcast-shell">
           <div class="section-heading">
-            <div><p class="podcast-kicker podcast-kicker--dark">Around the microphone</p><h2 id="guests-title">Voices in the conversation.</h2></div>
-            <p>Hosts and guests bringing lived experience, scholarship, and service into each exchange.</p>
+            <div><p class="podcast-kicker podcast-kicker--dark">Behind the podcast</p><h2 id="team-title">The team behind every conversation.</h2></div>
+            <p>From production and logistics to the voices at the microphone, meet the people who make Tomorrow's Ummah possible.</p>
           </div>
-          <div class="voices__grid">
-            {voices.map((voice) => (
-              <article class="voice-card"><span class="voice-card__monogram" aria-hidden="true">{voice.initials}</span><div><p>{voice.role}</p><h3>{voice.name}</h3><span>{voice.episode}</span></div></article>
+          <div class="team__grid">
+            {team.map((member, index) => (
+              <article class:list={["team-card", !member.image && "team-card--placeholder"]}>
+                <div class="team-card__portrait">
+                  {member.image ? (
+                    <Image
+                      src={member.image}
+                      alt={member.alt}
+                      widths={[360, 560, 760]}
+                      sizes="(max-width: 720px) calc(100vw - 2.25rem), (max-width: 1080px) 30vw, 18vw"
+                      format="webp"
+                      quality={88}
+                    />
+                  ) : (
+                    <div class="team-card__placeholder" role="img" aria-label={`Portrait of ${member.name} coming soon`}>
+                      <span aria-hidden="true">{member.initials}</span>
+                      <small>Portrait coming soon</small>
+                    </div>
+                  )}
+                  <span class="team-card__index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                </div>
+                <div class="team-card__body">
+                  <p>{member.role}</p>
+                  <h3>{member.name}</h3>
+                </div>
+              </article>
             ))}
           </div>
         </div>

@@ -1,59 +1,14 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
-import PageHero from "../../components/PageHero.astro";
+import SlimHero from "../../components/SlimHero.astro";
 import SectionIntro from "../../components/SectionIntro.astro";
-import ExperienceCard from "../../components/ExperienceCard.astro";
-import mercyImage from "../../assets/images/al-rahma-conference/shaykh-hammad-facing-crowd.png";
+import ProgramDirectory from "../../components/ProgramDirectory.astro";
 import hoopsTeam from "../../assets/images/hoops4humanity/myl-basketball.png";
-import hoopsAction from "../../assets/images/hoops4humanity/basketball-1.png";
-import qaImage from "../../assets/images/myl-qa-2026/myl-qa-2026-community.jpg";
-import hoodieImage from "../../assets/images/herosection/myl-back-hoodies.png";
 import hidayahImage from "../../assets/images/al-hidayah/al-hidayah-2026-keynote.jpg";
 import renaissanceCover from "../../assets/images/renaissance/summer-2025.png";
 
-const mylPrograms = [
-  {
-    eyebrow: "Annual conference",
-    title: "Al-Rahma (Mercy for Humanity)",
-    description:
-      "MYL Canada’s flagship conference series exploring the Prophetic example of mercy, dignity and justice.",
-    href: "/events/mercy-for-humanity/",
-    linkLabel: "Explore the series",
-    image: mercyImage,
-    imageAlt: "A scholar addressing the Al-Rahma conference audience",
-  },
-  {
-    eyebrow: "Sport & fellowship",
-    title: "Hoops 4 Humanity",
-    description:
-      "Basketball that brings youth together around teamwork, community and a service-minded purpose.",
-    href: "/programs/hoops-for-humanity/",
-    linkLabel: "Take it to the court",
-    image: hoopsAction,
-    imageAlt: "A player shooting the basketball during a MYL community game",
-  },
-  {
-    eyebrow: "Islamic learning",
-    title: "Al-Hikmah & youth conversations",
-    description:
-      "Halaqahs, tafsir, scholar Q&As and candid conversations about identity, purpose and contemporary life.",
-    href: "/events/",
-    linkLabel: "See recent gatherings",
-    image: qaImage,
-    imageAlt: "A MYL Canada youth question-and-answer gathering",
-  },
-  {
-    eyebrow: "Spiritual & social life",
-    title: "Gather. Remember. Serve.",
-    description:
-      "Mawlid programs, youth i‘tikaf, remembrance, community drives and the everyday work of belonging.",
-    href: "/get-involved/",
-    linkLabel: "Get involved",
-    image: hoodieImage,
-    imageAlt: "Two young people wearing Muslim Youth League Canada hoodies",
-  },
-];
+
 ---
 
 <Layout
@@ -62,14 +17,13 @@ const mylPrograms = [
   image={hoopsTeam}
 >
   <main id="main">
-    <PageHero
+    <SlimHero
+      titleId="programs-hero-title"
       eyebrow="Programs"
       title="Faith grows when it moves through life."
       intro="MYL Canada programming joins serious learning with spiritual formation, friendship, service and recreation—because young people need a community that sees the whole person."
-      image={hoopsTeam}
-      imageAlt="Players, volunteers and families at a MYL Canada basketball gathering"
       tone="dark"
-      meta={[
+      facts={[
         { label: "Learn", value: "Halaqahs & Q&As" },
         { label: "Gather", value: "Conferences & retreats" },
         { label: "Act", value: "Service & sport" },
@@ -79,13 +33,11 @@ const mylPrograms = [
     <section class="section programs">
       <div class="shell">
         <SectionIntro
-          eyebrow="MYL-led programming"
+          eyebrow="Programs & community collaborations"
           title="Many ways to grow."
-          intro="Some young people enter through a lecture, others through a team, a volunteer shift or a difficult question. Each is a valid beginning."
+          intro="Explore our conferences, learning circles, spiritual gatherings, sport and media. Find a program that speaks to you and discover how to take part."
         />
-        <div class="programs__grid">
-          {mylPrograms.map((program) => <ExperienceCard {...program} />)}
-        </div>
+        <ProgramDirectory />
       </div>
     </section>
 
@@ -108,7 +60,7 @@ const mylPrograms = [
       <div class="shell">
         <SectionIntro
           eyebrow="Connected initiatives"
-          title="Partnership without blurred lines."
+          title="Keep exploring."
           intro="MYL Canada also contributes to or points young people toward strong initiatives in its wider scholarly and community ecosystem."
         />
         <div class="connections__grid">
@@ -171,12 +123,7 @@ const mylPrograms = [
 </Layout>
 
 <style>
-  .programs__grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-    margin-top: 3rem;
-  }
+
 
   .pathway__grid {
     display: grid;
@@ -303,7 +250,6 @@ const mylPrograms = [
   }
 
   @media (max-width: 760px) {
-    .programs__grid,
     .connections__grid,
     .connection-card {
       grid-template-columns: 1fr;

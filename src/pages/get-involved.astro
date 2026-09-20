@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/PageHero.astro";
+import SlimHero from "../components/SlimHero.astro";
 import SectionIntro from "../components/SectionIntro.astro";
-import { organization } from "../data/site.js";
+import { contactForm, organization } from "../data/site.js";
 import qaGroup from "../assets/images/myl-qa-2026/myl-qa-2026-stage.jpg";
 import hoodieImage from "../assets/images/herosection/myl-back-hoodies.png";
 import hoopsTeam from "../assets/images/hoops4humanity/myl-basketball.png";
@@ -17,36 +17,112 @@ const volunteerEmail = `mailto:${organization.email}?subject=MYL%20Canada%20Volu
   image={qaGroup}
 >
   <main id="main">
-    <PageHero
+    <SlimHero
+      titleId="get-involved-hero-title"
       eyebrow="Get involved"
       title="Do meaningful work with good people."
       intro="MYL Canada is built by people willing to carry a real piece of the work. Bring your reliability, your curiosity and the skills you are still developing."
-      image={qaGroup}
-      imageAlt="MYL Canada youth, organizers and scholars gathered together"
-      meta={[
+      facts={[
         { label: "Bring", value: "Consistency" },
         { label: "Build", value: "Useful skills" },
         { label: "Become", value: "Part of the team" },
       ]}
     />
 
-    <section class="section invitation">
-      <div class="shell invitation__grid">
-        <div>
+    <section class="section invitation" aria-labelledby="invitation-title">
+      <div class="shell invitation__inner">
+        <div class="invitation__head">
           <p class="eyebrow">Volunteer with MYL</p>
-          <h2>Leadership begins with carrying something well.</h2>
+          <h2 id="invitation-title">Put your name forward.</h2>
         </div>
-        <div class="prose">
-          <p class="lead">
-            You do not need a perfect résumé or years of experience. You do need to communicate,
-            follow through and care about the people the work is for.
+
+        <form
+          class="site-form invitation__form"
+          data-site-form
+          data-endpoint={contactForm.endpoint}
+          data-fallback-email={organization.email}
+          data-subject="MYL Canada Volunteer Interest"
+          novalidate
+        >
+          <div class="site-form__row invitation__row--three">
+            <p class="field">
+              <label for="vf-name">Name</label>
+              <input
+                id="vf-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                minlength="2"
+                data-error-message="Please enter your name."
+                required
+              />
+              <span class="field__error" id="vf-name-error" data-error-for="name" hidden></span>
+            </p>
+            <p class="field">
+              <label for="vf-email">Email</label>
+              <input
+                id="vf-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                data-error-message="Please enter a valid email address."
+                required
+              />
+              <span class="field__error" id="vf-email-error" data-error-for="email" hidden></span>
+            </p>
+            <p class="field">
+              <label for="vf-city">City</label>
+              <input
+                id="vf-city"
+                name="city"
+                type="text"
+                autocomplete="address-level2"
+                data-error-message="Please tell us which city you are in."
+                required
+              />
+              <span class="field__error" id="vf-city-error" data-error-for="city" hidden></span>
+            </p>
+          </div>
+
+          <div class="site-form__row">
+            <p class="field">
+              <label for="vf-area">Where you would like to help</label>
+              <select id="vf-area" name="area">
+                <option>Not sure yet — place me where needed</option>
+                <option>Event operations</option>
+                <option>Media &amp; design</option>
+                <option>Learning programs</option>
+                <option>Sports &amp; recreation</option>
+                <option>Community outreach</option>
+                <option>General team</option>
+              </select>
+            </p>
+            <p class="field">
+              <label for="vf-availability">Availability</label>
+              <select id="vf-availability" name="availability">
+                <option>Weekends</option>
+                <option>Weekday evenings</option>
+                <option>Event days only</option>
+                <option>Flexible</option>
+              </select>
+            </p>
+          </div>
+
+          <p class="field">
+            <label for="vf-about">Anything else</label>
+            <textarea id="vf-about" name="about" rows="3"></textarea>
           </p>
-          <p>
-            MYL programming creates practical opportunities to learn by doing: preparing a room,
-            welcoming guests, coordinating registration, creating media, running a sports session
-            or helping a thoughtful conversation reach the right people.
+
+          <p class="site-form__trap" aria-hidden="true">
+            <label for="vf-company">Company</label>
+            <input id="vf-company" name="company" type="text" tabindex="-1" autocomplete="off" />
           </p>
-        </div>
+
+          <div class="site-form__actions">
+            <button class="button" type="submit">Send my interest</button>
+            <span class="site-form__status" data-form-status role="status" aria-live="polite"></span>
+          </div>
+        </form>
       </div>
     </section>
 
@@ -123,15 +199,61 @@ const volunteerEmail = `mailto:${organization.email}?subject=MYL%20Canada%20Volu
 </Layout>
 
 <style>
-  .invitation__grid {
+  .invitation__inner {
     display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
-    gap: clamp(3rem, 8vw, 8rem);
+    gap: clamp(1.75rem, 4vw, 2.75rem);
   }
 
   .invitation h2 {
-    max-width: 12ch;
-    margin-top: 1rem;
+    max-width: 18ch;
+    margin-top: 0.75rem;
+  }
+
+  /* Open-concept fields: no card, no boxes — just ruled lines. */
+
+  .invitation__form {
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .invitation__row--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .invitation__form .field input,
+  .invitation__form .field select,
+  .invitation__form .field textarea {
+    min-height: 2.75rem;
+    padding: 0.55rem 0;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .invitation__form .field textarea {
+    min-height: 4.5rem;
+  }
+
+  .invitation__form .field input:focus-visible,
+  .invitation__form .field select:focus-visible,
+  .invitation__form .field textarea:focus-visible {
+    border-bottom-color: var(--green);
+    box-shadow: 0 1px 0 0 var(--green);
+    outline: none;
+  }
+
+  .invitation__form .field :is(input, select, textarea)[aria-invalid="true"] {
+    border-bottom-color: var(--red);
+  }
+
+  .invitation__form .site-form__actions {
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .invitation__row--three {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   .roles__grid {
@@ -295,7 +417,6 @@ const volunteerEmail = `mailto:${organization.email}?subject=MYL%20Canada%20Volu
   }
 
   @media (max-width: 850px) {
-    .invitation__grid,
     .expectations__grid,
     .start__card {
       grid-template-columns: 1fr;
@@ -321,3 +442,7 @@ const volunteerEmail = `mailto:${organization.email}?subject=MYL%20Canada%20Volu
     }
   }
 </style>
+
+<script>
+  import "../scripts/site-form.ts";
+</script>

@@ -1,32 +1,16 @@
 ---
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/PageHero.astro";
-import SectionIntro from "../components/SectionIntro.astro";
-import mercyHero from "../assets/images/al-rahma-conference/shaykh-hammad-facing-crowd.png";
-import mercy2021 from "../assets/images/mercy-conference/2021/mercy-2021-audience.jpg";
-import mercy2022 from "../assets/images/mercy-conference/2022/mercy-2022-keynote.jpg";
-import mercy2023 from "../assets/images/mercy-conference/2023/mercy-2023-audience.jpg";
-import mercyStage from "../assets/images/mercy-conference/2023/mercy-2023-keynote.jpg";
-import qaGroup from "../assets/images/myl-qa-2026/myl-qa-2026-stage.jpg";
-import qaCommunity from "../assets/images/myl-qa-2026/myl-qa-2026-community.jpg";
-import hidayahAudience from "../assets/images/al-hidayah/al-hidayah-2023-gathering.jpg";
-import hidayahKeynote from "../assets/images/al-hidayah/al-hidayah-2026-keynote.jpg";
+import SlimHero from "../components/SlimHero.astro";
+import { galleryCollections, galleryPhotos } from "../data/gallery";
 import hoopsTeam from "../assets/images/hoops4humanity/myl-basketball.png";
-import hoopsAction from "../assets/images/hoops4humanity/basketball-1.png";
+import mercyHero from "../assets/images/al-rahma-conference/shaykh-hammad-facing-crowd.png";
 
-const photos = [
-  { image: mercy2023, alt: "Audience at Al-Rahma 2023", title: "Al-Rahma", meta: "2023 · Mississauga", shape: "wide" },
-  { image: hoopsAction, alt: "A player shooting at a MYL basketball gathering", title: "Hoops 4 Humanity", meta: "Sport & fellowship", shape: "tall" },
-  { image: qaGroup, alt: "MYL Canada organizers and guests gathered in 2026", title: "Meet, Greet & Q&A", meta: "2026 · Jāmiʿ al-Mustafa", shape: "standard" },
-  { image: hidayahAudience, alt: "A full audience at Al-Hidayah", title: "Al-Hidayah Canada", meta: "Learning together", shape: "wide" },
-  { image: mercy2021, alt: "Audience at the first Al-Rahma conference", title: "The first edition", meta: "2021 · Living Arts Centre", shape: "standard" },
-  { image: mercy2022, alt: "Keynote at Al-Rahma 2022", title: "A growing conference", meta: "2022 · The International Centre", shape: "standard" },
-  { image: hoopsTeam, alt: "Large group photograph from a MYL basketball gathering", title: "The whole team", meta: "Connect · Act · Impact", shape: "panorama" },
-  { image: hidayahKeynote, alt: "Shaykh-ul-Islam teaching at Al-Hidayah Canada 2026", title: "Pure Intentions & Noble Conduct", meta: "Al-Hidayah 2026", shape: "standard" },
-  { image: qaCommunity, alt: "MYL youth at a live question-and-answer session", title: "Questions in community", meta: "MYL Canada 2026", shape: "standard" },
-  { image: mercyStage, alt: "Shaykh Hammad Mustafa on stage at Al-Rahma 2023", title: "A code of humanity", meta: "Third annual conference", shape: "wide" },
-];
+const photos = await Promise.all(galleryPhotos.map(async (photo) => ({
+  ...photo,
+  collectionInfo: galleryCollections.find((collection) => collection.id === photo.collection)!,
+  full: await getImage({ src: photo.image, width: Math.min(photo.image.width, 2000), format: "webp", quality: 90 }),
+})));
 ---
 
 <Layout
@@ -35,169 +19,262 @@ const photos = [
   image={mercyHero}
 >
   <main id="main">
-    <PageHero
+    <SlimHero
+      titleId="gallery-hero-title"
       eyebrow="Gallery"
       title="Community looks better from inside it."
       intro="Real photographs from MYL Canada programs, the Al-Rahma conference series, Hoops 4 Humanity and connected events supported by MYL volunteers."
-      image={mercyHero}
-      imageAlt="A scholar addressing a full conference audience"
-      tone="dark"
-      meta={[
+      facts={[
         { label: "Conference", value: "Al-Rahma" },
         { label: "Sport", value: "Hoops 4 Humanity" },
         { label: "Connection", value: "Al-Hidayah & Q&A" },
       ]}
     />
 
-    <section class="section gallery-page">
-      <div class="shell">
-        <SectionIntro
-          eyebrow="In the room"
-          title="Learning, listening, playing and building."
-          intro="Every image below is a supplied MYL asset or official event photograph saved locally for a reliable, placeholder-free site."
-        />
-        <div class="gallery-page__grid">
-          {
-            photos.map((photo) => (
-              <figure class={`gallery-page__item gallery-page__item--${photo.shape}`}>
-                <Image
-                  src={photo.image}
-                  alt={photo.alt}
-                  widths={[480, 800, 1200]}
-                  sizes="(max-width: 700px) 92vw, (max-width: 1050px) 45vw, 31vw"
-                  format="webp"
-                  quality={84}
-                />
-                <figcaption><strong>{photo.title}</strong><span>{photo.meta}</span></figcaption>
-              </figure>
-            ))
-          }
-        </div>
-        <p class="source-note gallery-page__source">
-          Conference and retreat photography is sourced from the official MMCC, Minhaj and Al-Hidayah reports referenced on the relevant event pages.
-        </p>
-      </div>
-    </section>
+    <photo-gallery>
+      <section class="gallery-section" aria-labelledby="gallery-heading">
+        <div class="shell">
+          <div class="gallery-intro">
+            <div>
+              <p class="eyebrow">Life at MYL Canada</p>
+              <h2 id="gallery-heading">Shared moments.<br /><em>Lasting connections.</em></h2>
+            </div>
+            <div class="gallery-intro__aside">
+              <p>The energy of a full room. The focus before a shot. The friendships that stay with us. Take a closer look at our community in motion.</p>
+              <div class="gallery-intro__details">
+                <span><strong>{photos.length}</strong> photographs</span>
+                <span><strong>{galleryCollections.length}</strong> collections</span>
+              </div>
+            </div>
+          </div>
 
-    <section class="section section--compact">
-      <div class="shell cta-band">
-        <p class="eyebrow eyebrow--light">Be in the next frame</p>
-        <h2>Show up. Help out. Bring someone with you.</h2>
-        <p>Follow MYL Canada for current event announcements or join the volunteer team.</p>
-        <div class="button-row">
-          <a class="button button--light" href="/get-involved/">Get involved</a>
-          <a class="button button--ghost" href="https://www.instagram.com/mylcanada/" target="_blank" rel="noreferrer">Follow @mylcanada ↗</a>
+          <div class="gallery-toolbar">
+            <div class="gallery-filters" data-gallery-filters role="group" aria-label="Filter photographs by event" hidden>
+              <button type="button" data-filter="all" data-label="All moments" aria-pressed="true" aria-controls="gallery-grid">
+                All moments <span>{photos.length}</span>
+              </button>
+              {galleryCollections.map((collection) => (
+                <button type="button" data-filter={collection.id} data-label={collection.label} aria-pressed="false" aria-controls="gallery-grid">
+                  {collection.label}<span>{photos.filter((photo) => photo.collection === collection.id).length}</span>
+                </button>
+              ))}
+            </div>
+            <div class="gallery-toolbar__meta">
+              <p role="status" aria-live="polite" aria-atomic="true" data-gallery-count>{photos.length} photographs</p>
+              <span class="gallery-hint">
+                <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M7 3H3v4m10-4h4v4M3 13v4h4m10-4v4h-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                Select a photo to explore
+              </span>
+            </div>
+          </div>
+
+          <div class="gallery-grid" id="gallery-grid" data-gallery-grid data-filtered="false">
+            {photos.map((photo, index) => (
+              <figure class:list={["gallery-photo", photo.layout && `gallery-photo--${photo.layout}`]} data-gallery-item data-collection={photo.collection}>
+                <a class="gallery-photo__link" href={photo.full.src} data-photo-link
+                  data-title={photo.title} data-meta={photo.meta} data-event-href={photo.collectionInfo.href}
+                  data-collection-label={photo.collectionInfo.label} aria-label={`View photograph: ${photo.title}`}>
+                  <div class="gallery-photo__image">
+                    <Image src={photo.image} alt={photo.alt} widths={[400, 700, 1000, 1400]}
+                      sizes={`(max-width: 600px) 92vw, (max-width: 950px) ${photo.layout === "wide" ? "92vw" : "45vw"}, ${photo.layout === "wide" ? "65vw" : photo.layout === "half" ? "48vw" : "31vw"}`}
+                      format="webp" quality={85} loading={index < 2 ? "eager" : "lazy"} decoding="async" />
+                    <span class="gallery-photo__label">{photo.collectionInfo.label}</span>
+                    <span class="gallery-photo__expand" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="20" height="20"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                    </span>
+                  </div>
+                </a>
+                <figcaption>
+                  <div><h3>{photo.title}</h3><p>{photo.meta}</p></div>
+                  <span class="gallery-photo__number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <div class="gallery-endnote">
+            <p>Photographs from MYL Canada and our community partners.</p>
+            <a href="/events/">Discover the stories behind the gatherings <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+
+      <dialog class="photo-viewer" aria-labelledby="viewer-title" aria-describedby="viewer-meta">
+        <div class="photo-viewer__top">
+          <span>MYL Canada <i aria-hidden="true">/</i> Gallery</span>
+          <div>
+            <span class="photo-viewer__position" data-viewer-position aria-live="polite" aria-atomic="true"></span>
+            <button class="viewer-icon" type="button" data-viewer-close aria-label="Close photo viewer">
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
+            </button>
+          </div>
+        </div>
+        <div class="photo-viewer__frame" data-viewer-frame>
+          <img class="photo-viewer__image" data-viewer-image alt="" decoding="async" />
+          <p class="photo-viewer__status" data-viewer-status role="status" hidden></p>
+        </div>
+        <div class="photo-viewer__bottom">
+          <div class="photo-viewer__caption">
+            <h2 id="viewer-title" data-viewer-title></h2>
+            <p id="viewer-meta" data-viewer-meta></p>
+          </div>
+          <div class="photo-viewer__navigation" aria-label="Photo navigation">
+            <button class="viewer-icon" type="button" data-viewer-previous aria-label="Previous photograph">
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </button>
+            <button class="viewer-icon" type="button" data-viewer-next aria-label="Next photograph">
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </button>
+          </div>
+        </div>
+        <div class="photo-viewer__links">
+          <a data-viewer-event href="/events/">Explore the event</a>
+          <a data-viewer-original target="_blank" rel="noopener noreferrer">Open image <span aria-hidden="true">↗</span></a>
+        </div>
+      </dialog>
+    </photo-gallery>
+
+    <section class="gallery-invitation" aria-labelledby="invitation-title">
+      <div class="shell gallery-invitation__inner">
+        <div class="gallery-invitation__photo">
+          <Image src={hoopsTeam} alt="The Hoops 4 Humanity community gathered together on the court"
+            widths={[480, 800, 1200]} sizes="(max-width: 800px) 90vw, 48vw" format="webp" loading="lazy" />
+          <span>There’s room for you here.</span>
+        </div>
+        <div class="gallery-invitation__copy">
+          <p class="eyebrow eyebrow--light">Be in the next frame</p>
+          <h2 id="invitation-title">The next memory<br />starts with <em>you.</em></h2>
+          <p>Join a gathering, bring a friend, or help behind the scenes. This community is built by the people who show up.</p>
+          <div class="button-row">
+            <a class="button button--light" href="/events/">Find your next gathering <span aria-hidden="true">→</span></a>
+            <a class="gallery-invitation__volunteer" href="/get-involved/">Volunteer with MYL <span aria-hidden="true">↗</span></a>
+          </div>
+          <a class="gallery-invitation__instagram" href="https://www.instagram.com/mylcanada/" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6" /><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" /></svg>
+            More moments on Instagram <span>@mylcanada ↗</span>
+          </a>
         </div>
       </div>
     </section>
   </main>
 </Layout>
 
+<script>
+  import "../scripts/gallery";
+</script>
+
 <style>
-  .gallery-page__grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-auto-flow: dense;
-    grid-auto-rows: 220px;
-    gap: 1rem;
-    margin-top: 3rem;
+  photo-gallery { display: block; }
+  .gallery-section { padding-block: clamp(3.25rem, 6vw, 5.25rem) clamp(3rem, 5vw, 4.5rem); }
+  .gallery-intro { display: grid; grid-template-columns: 1.1fr 0.9fr; align-items: end; gap: clamp(2rem, 6vw, 5rem); }
+  .gallery-intro h2 { margin-top: 1rem; font-size: clamp(2.4rem, 4.4vw, 4rem); letter-spacing: -0.05em; line-height: 1.08; }
+  h2 em { color: var(--green); font-family: var(--font-serif); font-weight: 500; }
+  .gallery-intro__aside { max-width: 43ch; justify-self: end; }
+  .gallery-intro__aside > p { color: var(--muted); font-size: 0.96rem; line-height: 1.8; }
+  .gallery-intro__details { display: flex; gap: 1.6rem; margin-top: 1.35rem; color: var(--muted); font-size: 0.76rem; }
+  .gallery-intro__details span { display: inline-flex; align-items: baseline; gap: 0.45rem; }
+  .gallery-intro__details strong { color: var(--green-deep); font-family: var(--font-serif); font-size: 1.35rem; font-weight: 600; }
+  .gallery-intro__details span + span { padding-left: 1.6rem; border-left: 1px solid var(--line); }
+  .gallery-toolbar { margin-block: 2.5rem 1.4rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  .gallery-filters { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .gallery-filters[hidden], .gallery-photo[hidden], .photo-viewer__status[hidden] { display: none; }
+  .gallery-filters button { display: inline-flex; min-height: 44px; align-items: center; gap: 0.7rem; padding: 0.65rem 1.05rem; border: 1px solid var(--line); border-radius: 99px; background: transparent; color: var(--muted); font-size: 0.8rem; font-weight: 700; transition: background 180ms ease, color 180ms ease; }
+  .gallery-filters button span { font-size: 0.67rem; font-weight: 500; opacity: 0.8; }
+  .gallery-filters button:hover { border-color: var(--green); color: var(--green-deep); }
+  .gallery-filters button[aria-pressed="true"] { border-color: var(--green-deep); background: var(--green-deep); color: white; }
+  .gallery-toolbar__meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.3rem; color: var(--muted); font-size: 0.73rem; }
+  .gallery-hint { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1.6rem 1.35rem; }
+  .gallery-photo { grid-column: span 4; min-width: 0; margin: 0; }
+  .gallery-photo--wide { grid-column: span 8; }
+  .gallery-photo--half { grid-column: span 6; }
+  .gallery-photo__link { display: block; border-radius: 1rem; }
+  .gallery-photo__image { position: relative; overflow: hidden; height: clamp(220px, 22vw, 280px); border-radius: 1rem; background: var(--cream-deep); }
+  .gallery-photo--wide .gallery-photo__image, .gallery-photo--portrait .gallery-photo__image { height: clamp(320px, 32vw, 420px); }
+  .gallery-photo--half .gallery-photo__image { height: clamp(270px, 27vw, 350px); }
+  .gallery-photo__image::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgb(0 0 0 / 0.18), transparent 30%, transparent 75%, rgb(0 0 0 / 0.15)); }
+  .gallery-photo__image :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms cubic-bezier(0.2, 0.7, 0.3, 1); }
+  .gallery-photo__link:hover .gallery-photo__image :global(img) { transform: scale(1.035); }
+  .gallery-photo__label { position: absolute; z-index: 1; top: 1rem; left: 1rem; padding: 0.35rem 0.7rem; border: 1px solid rgb(255 255 255 / 0.28); border-radius: 99px; background: rgb(14 30 22 / 0.82); color: white; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.02em; }
+  .gallery-photo__expand { position: absolute; z-index: 1; right: 1rem; bottom: 1rem; display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid rgb(255 255 255 / 0.55); border-radius: 50%; background: rgb(0 0 0 / 0.34); color: white; transition: background 180ms ease; }
+  .gallery-photo__link:hover .gallery-photo__expand, .gallery-photo__link:focus-visible .gallery-photo__expand { background: var(--green-deep); }
+  figcaption { display: flex; align-items: start; justify-content: space-between; gap: 1rem; padding: 1rem 0.2rem 0.7rem; }
+  figcaption h3 { font-family: var(--font-serif); font-size: clamp(1.12rem, 1.8vw, 1.4rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.025em; }
+  figcaption p { margin-top: 0.35rem; color: var(--muted); font-size: 0.72rem; }
+  .gallery-photo__number { padding-top: 0.15rem; color: var(--green); font-size: 0.65rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .gallery-grid[data-filtered="true"] .gallery-photo { grid-column: span 4; }
+  .gallery-grid[data-filtered="true"] .gallery-photo__image { height: auto; aspect-ratio: 4 / 3; }
+  .gallery-endnote { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.7rem 1.5rem; margin-top: 2rem; padding-top: 1.3rem; border-top: 1px solid var(--line); font-size: 0.75rem; }
+  .gallery-endnote p { color: var(--muted); }
+  .gallery-endnote a { color: var(--green-deep); font-weight: 700; }
+  .gallery-endnote a:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+  .gallery-invitation { padding-block: 0 clamp(3rem, 6vw, 5.5rem); }
+  .gallery-invitation__inner { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border-radius: var(--radius-lg); background: var(--green-deep); color: white; }
+  .gallery-invitation__photo { position: relative; min-height: 400px; overflow: hidden; }
+  .gallery-invitation__photo :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .gallery-invitation__photo span { position: absolute; inset: auto 0 0; padding: 4rem 2rem 1.5rem; background: linear-gradient(transparent, rgb(0 0 0 / 0.7)); font-family: var(--font-serif); font-size: 1.3rem; }
+  .gallery-invitation__copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(1.6rem, 4vw, 3.3rem); }
+  .gallery-invitation h2 { margin-top: 1rem; font-size: clamp(2.1rem, 3.1vw, 3rem); line-height: 1.1; }
+  .gallery-invitation h2 em { color: #cadfc7; }
+  .gallery-invitation__copy > p:not(.eyebrow) { max-width: 43ch; margin-top: 1.1rem; color: rgb(255 255 255 / 0.78); font-size: 0.92rem; }
+  .gallery-invitation .button-row { align-items: center; gap: 1rem 1.4rem; margin-top: 1.6rem; }
+  .gallery-invitation .button { font-size: 0.71rem; }
+  .gallery-invitation__volunteer { font-size: 0.77rem; font-weight: 700; }
+  .gallery-invitation__volunteer:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+  .gallery-invitation__instagram { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin-top: 1.8rem; padding-top: 1.2rem; border-top: 1px solid rgb(255 255 255 / 0.2); color: #d2e2d5; font-size: 0.74rem; }
+  .gallery-invitation__instagram span { color: white; }
+  .photo-viewer { width: min(1200px, calc(100vw - 3rem)); max-width: none; max-height: calc(100dvh - 3rem); padding: 0; overflow: auto; border: 1px solid #3f4740; border-radius: 1rem; background: #131b16; color: white; color-scheme: dark; box-shadow: 0 30px 100px rgb(0 0 0 / 0.5); }
+  .photo-viewer::backdrop { background: rgb(5 12 8 / 0.9); backdrop-filter: blur(8px); }
+  .photo-viewer__top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 1.2rem; }
+  .photo-viewer__top > span { font-size: 0.73rem; letter-spacing: 0.08em; }
+  .photo-viewer__top i { margin-inline: 0.5rem; color: #a4b7a7; font-style: normal; }
+  .photo-viewer__top > div { display: flex; align-items: center; gap: 1rem; }
+  .photo-viewer__position { color: #c3d0c7; font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+  .viewer-icon { display: grid; place-items: center; flex: 0 0 auto; width: 44px; height: 44px; padding: 0; border: 1px solid #647368; border-radius: 50%; background: transparent; color: white; }
+  .viewer-icon:hover { background: #354c3d; }
+  .viewer-icon:disabled { opacity: 0.4; cursor: default; }
+  .photo-viewer :focus-visible { outline: 3px solid #b9dec1; outline-offset: 3px; }
+  .photo-viewer__frame { position: relative; display: grid; place-items: center; height: min(63dvh, 700px); min-height: 140px; background: #0b100d; touch-action: pan-y; }
+  .photo-viewer__image { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+  .photo-viewer__frame[data-state="loading"] .photo-viewer__image, .photo-viewer__frame[data-state="error"] .photo-viewer__image { opacity: 0; }
+  .photo-viewer__status { position: absolute; inset: 0; display: grid; place-items: center; padding: 2rem; color: #d2e2d5; text-align: center; font-size: 0.9rem; }
+  .photo-viewer__bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.4rem 0.5rem; }
+  .photo-viewer__caption h2 { font-family: var(--font-serif); font-size: clamp(1.2rem, 2.3vw, 1.7rem); font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; }
+  .photo-viewer__caption p { margin-top: 0.4rem; color: #b7c7bc; font-size: 0.78rem; }
+  .photo-viewer__navigation { display: flex; flex: 0 0 auto; gap: 0.6rem; }
+  .photo-viewer__links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.5rem; padding: 0.5rem 1.4rem 1.2rem; }
+  .photo-viewer__links a { padding-block: 0.2rem; color: #c3dfc9; font-size: 0.77rem; text-decoration: underline; text-underline-offset: 0.25em; }
+  @media (max-width: 950px) {
+    .gallery-intro { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .gallery-photo, .gallery-photo--wide, .gallery-photo--half, .gallery-grid[data-filtered="true"] .gallery-photo { grid-column: span 6; }
+    .gallery-photo__image, .gallery-photo--wide .gallery-photo__image, .gallery-photo--portrait .gallery-photo__image, .gallery-photo--half .gallery-photo__image { height: auto; aspect-ratio: 4 / 3; }
+    .gallery-photo--wide { grid-column: 1 / -1; }
+    .gallery-photo--wide .gallery-photo__image { aspect-ratio: 16 / 8; }
   }
-
-  .gallery-page__item {
-    position: relative;
-    grid-row: span 2;
-    margin: 0;
-    overflow: hidden;
-    border-radius: var(--radius);
-    background: var(--cream);
+  @media (max-width: 800px) {
+    .gallery-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+    .gallery-intro__aside { max-width: 58ch; justify-self: start; }
+    .gallery-invitation__inner { grid-template-columns: 1fr; }
+    .gallery-invitation__photo { min-height: 0; aspect-ratio: 16 / 9; }
   }
-
-  .gallery-page__item--wide {
-    grid-column: span 2;
+  @media (max-width: 600px) {
+    .gallery-grid { grid-template-columns: minmax(0, 1fr); gap: 1.35rem; }
+    .gallery-photo, .gallery-photo--wide, .gallery-photo--half, .gallery-grid[data-filtered="true"] .gallery-photo { grid-column: auto; }
+    .gallery-photo--wide .gallery-photo__image { aspect-ratio: 4 / 3; }
+    .gallery-filters { gap: 0.45rem; }
+    .gallery-filters button { padding-inline: 0.8rem; font-size: 0.72rem; }
+    .gallery-toolbar__meta { align-items: start; font-size: 0.66rem; }
+    .gallery-hint { gap: 0.3rem; }
+    .gallery-photo__label { top: 0.8rem; left: 0.8rem; }
+    .photo-viewer { width: calc(100vw - 1rem); max-height: calc(100dvh - 1rem); border-radius: 0.8rem; }
+    .photo-viewer__top { padding: 0.65rem 0.8rem; }
+    .photo-viewer__frame { height: 48dvh; }
+    .photo-viewer__bottom { align-items: start; gap: 0.7rem; padding: 1rem 0.8rem 0.5rem; }
+    .photo-viewer__caption h2 { font-size: 1.2rem; }
+    .photo-viewer__navigation { gap: 0.4rem; }
+    .photo-viewer__links { padding-inline: 0.8rem; }
   }
-
-  .gallery-page__item--tall {
-    grid-row: span 3;
-  }
-
-  .gallery-page__item--panorama {
-    grid-column: 1 / -1;
-    grid-row: span 2;
-  }
-
-  .gallery-page__item :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 450ms ease;
-  }
-
-  .gallery-page__item:hover :global(img) {
-    transform: scale(1.025);
-  }
-
-  .gallery-page figcaption {
-    position: absolute;
-    inset: auto 0 0;
-    padding: 3.5rem 1.1rem 1.1rem;
-    background: linear-gradient(transparent, rgb(0 0 0 / 0.84));
-    color: var(--white);
-  }
-
-  .gallery-page figcaption strong,
-  .gallery-page figcaption span {
-    display: block;
-  }
-
-  .gallery-page figcaption strong {
-    font-family: var(--font-display);
-    font-size: 1.08rem;
-  }
-
-  .gallery-page figcaption span {
-    margin-top: 0.15rem;
-    color: rgb(255 255 255 / 0.65);
-    font-size: 0.75rem;
-  }
-
-  .gallery-page__source {
-    margin-top: 1.25rem;
-  }
-
-  .cta-band > p:not(.eyebrow) {
-    max-width: 54ch;
-    margin-top: 1.2rem;
-    color: rgb(255 255 255 / 0.78);
-  }
-
-  .cta-band h2 {
-    margin-top: 1rem;
-  }
-
-  @media (max-width: 850px) {
-    .gallery-page__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .gallery-page__item--panorama {
-      grid-column: 1 / -1;
-    }
-  }
-
-  @media (max-width: 580px) {
-    .gallery-page__grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-auto-rows: auto;
-    }
-
-    .gallery-page__item,
-    .gallery-page__item--wide,
-    .gallery-page__item--tall,
-    .gallery-page__item--panorama {
-      grid-column: auto;
-      grid-row: auto;
-      min-height: 310px;
-    }
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-photo__image :global(img), .gallery-photo__expand, .gallery-filters button { transition: none; }
   }
 </style>

@@ -9,6 +9,14 @@ export const organization = {
   mapsUrl: "https://maps.google.com/?q=2505+Dixie+Rd+Mississauga+ON+L4Y+2A1",
 };
 
+// Contact form delivery. The site builds to static files, so the form needs an
+// external endpoint to POST to — paste a Formspree / Web3Forms / Basin URL here.
+// While this is empty the form falls back to opening the visitor's mail client
+// with the message pre-filled, so the page still works.
+export const contactForm = {
+  endpoint: "",
+};
+
 export const navigation = [
   { label: "About", href: "/about/" },
   { label: "Events & Programs", href: "/events/" },
